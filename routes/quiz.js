@@ -7,11 +7,28 @@ const router = express.Router();
 
 module.exports = (db) =>
 {
+  //CREATE
+  //router.post("/", (...))
 
-  router.get(":id", (req, res) =>
+  //READALL
+  //router.get("/", (...))
+
+  //READONE
+  //router.get("/:id", (...))
+
+  //UPDATE
+  //router.put("/:id/edit", (...))
+
+  //DELETE
+  //router.delete("/:id/delete", (...))
+
+  //DESTROY
+  //router.delete("/:id/destroy", (...))
+
+  router.get("/:id", (req, res) =>
   {
 
-    db.query(`SELECT * FROM users;`)
+    db.query(`SELECT * FROM quizzes;`)
       .then(data =>
       {
         const users = data.rows;
@@ -28,15 +45,17 @@ module.exports = (db) =>
   });
 
   //Post answers to a specific quiz
-  router.post(":id", (req, res) =>
+  router.post("/:id", (req, res) =>
   {
     //if user is loggin in then pass user id if not then just attempt
     //save results to database
     res.redirect(":id/results/:resultid");
   });
 
+
+
   //make link to share wihtin this route only display in wjs the line if someone want to share it
-  router.get(":id/results/:resultid", (req, res) =>
+  router.get("/:id/results/:resultid", (req, res) =>
   {
 
     res.render("show_results")
