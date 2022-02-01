@@ -10,6 +10,31 @@ module.exports = (db) =>
   //CREATE
   //router.post("/", (...))
 
+  //create a quiz
+
+  router.post("/new", (req, res) =>
+  {
+    res.redirect("/quiz/:id");
+  });
+
+  //attempt a specific quiz// Does this route requires a .get an dif so... how is it built?
+  router.post("/:id", (req, res) =>
+  {
+    res.redirect("show_result");
+  });
+
+
+  //Post answers to a specific quiz
+  router.post("/:id", (req, res) =>
+  {
+    //if user is loggin in then pass user id if not then just attempt
+    //save results to database
+    res.redirect("/results/:id");
+  });
+
+  return router;
+};
+
   //READALL
   //router.get("/", (...))
 
@@ -25,41 +50,6 @@ module.exports = (db) =>
   //DESTROY
   //router.delete("/:id/destroy", (...))
 
-  router.get("/:id", (req, res) =>
-  {
-
-    db.query(`SELECT * FROM quizzes;`)
-      .then(data =>
-      {
-        const users = data.rows;
-        res.json({ users });
-      })
-      .catch(err =>
-      {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-    //like this name file
-    res.render("show_quiz");
-  });
-
-  //Post answers to a specific quiz
-  router.post("/:id", (req, res) =>
-  {
-    //if user is loggin in then pass user id if not then just attempt
-    //save results to database
-    res.redirect(":id/results/:resultid");
-  });
 
 
-
-  //make link to share wihtin this route only display in wjs the line if someone want to share it
-  router.get("/:id/results/:resultid", (req, res) =>
-  {
-
-    res.render("show_results")
-  });
-  return router;
-};
 
