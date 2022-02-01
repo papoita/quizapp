@@ -28,7 +28,8 @@ module.exports = (db) =>
     return res.render("my_quizzes");
   });
 
-  //see only one quiz
+
+  //see only one quiz or show newly created quiz
   router.get("/quiz/:id", (req, res) =>
   {
 
@@ -54,12 +55,11 @@ module.exports = (db) =>
     return res.render("quiz_new", { user });
   });
 
-  //show result of a specific quiz attempted
-  router.get("/results/:id", (req, res) =>
+  //show result of a specific quiz attempted, make link to share wihtin this route, display in ejs the url if someone want to share it
+  router.get("/attempt/:id/", (req, res) =>
   {
-    return res.render("show_results", { user });
+    res.render("show_attempt")
   });
-
 
   return router;
 };

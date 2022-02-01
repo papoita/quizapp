@@ -5,6 +5,26 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
+//CREATE
+//router.post("/", (...))
+
+//READALL
+//router.get("/", (...))
+//views folder -res.render
+
+//READONE
+//router.get("/:id", (...))
+//views folder -res.render
+
+//UPDATE
+//router.put("/:id/edit", (...))
+
+//DELETE
+//router.delete("/:id/delete", (...))
+
+//DESTROY
+//router.delete("/:id/destroy", (...))
+
 
 const express = require('express');
 const router = express.Router();
@@ -36,43 +56,7 @@ module.exports = (db) =>
     req.session = null;
     return res.redirect("/");
   });
-
-  //READALL
-  //router.get("/", (...))
-  //views folder -res.render
-
-  //READONE
-  //router.get("/:id", (...))
-  //views folder -res.render
-
-
-  //UPDATE
-  //router.put("/:id/edit", (...))
-
-  //DELETE
-  //router.delete("/:id/delete", (...))
-
-  //DESTROY
-  //router.delete("/:id/destroy", (...))
   return router;
 };
 
 
-
-
-  //register routes? .get / .post
-
-  //logout
-
-
-
-
-
-
-
-
-
-
-
-
-//when do we need to get from the database : results, students,
