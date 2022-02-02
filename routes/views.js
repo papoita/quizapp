@@ -28,6 +28,11 @@ module.exports = (db) =>
     return res.render("my_quizzes");
   });
 
+  router.get("users/:id", (req, res) =>
+  {
+    //ejs my_quizzes
+    return res.render("my_quizzes");
+  });
 
   //see only one quiz or show newly created quiz
   router.get("/quiz/:id", (req, res) =>
@@ -49,10 +54,16 @@ module.exports = (db) =>
     res.render("show_quiz");
   });
 
-  // new quizz create form
-  router.get("/quiz/new", (req, res) =>
+  // quizz create form
+  router.get("/quiz/create", (req, res) =>
   {
     return res.render("create_quiz", { user });
+  });
+
+  // new quiz created shareable link
+  router.get("/quiz/new", (req, res) =>
+  {
+    return res.render("new_quiz", { user });
   });
 
   // GET ATTEMPTS ENDPOINTS
