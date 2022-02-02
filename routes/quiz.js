@@ -27,13 +27,13 @@ module.exports = (db) =>
   //DELETE
   //router.delete("/:id/delete", (...))
   // delete quiz
-  router.delete("/:id/delete", (req, res) =>
-  {
-    //if public redirect to homepage?
-    //if private redirect to myquizzes?
-    //or just reload quizz page
-    res.redirect("users/:id");
-  });
+  // router.delete("/:id/delete", (req, res) =>
+  // {
+  //   //if public redirect to homepage?
+  //   //if private redirect to myquizzes?
+  //   //or just reload quizz page
+  //   res.redirect("users/:id");
+  // });
 
   //Post answers to a specific quiz
   router.post("/:id", (req, res) =>

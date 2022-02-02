@@ -52,9 +52,10 @@ module.exports = (db) =>
   // new quizz create form
   router.get("/quiz/new", (req, res) =>
   {
-    return res.render("quiz_new", { user });
+    return res.render("create_quiz", { user });
   });
 
+  // GET ATTEMPTS ENDPOINTS
   //show result of a specific quiz attempted, make link to share wihtin this route, display in ejs the url if someone want to share it
   router.get("/attempt/:id/", (req, res) =>
   {
