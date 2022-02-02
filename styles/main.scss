@@ -1,17 +1,57 @@
 body {
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  background-image: url("https://www.transparenttextures.com/patterns/cream-pixels.png");
+  align-items: flex-start;
+}
 
-  background: rgb(163, 208, 219);
-  background: linear-gradient(
-    227deg,
-    rgba(163, 208, 219, 1) 0%,
-    rgba(163, 176, 219, 1) 20%,
-    rgba(163, 173, 219, 1) 34%,
-    rgba(163, 219, 208, 1) 59%,
-    rgba(163, 208, 219, 1) 74%,
-    rgba(163, 208, 219, 1) 100%
-  );
+.quiz-container {
+  margin-top: 35%;
+  display: flex;
+  flex-flow: column;
+}
+
+.quiz{
+  display: flex;
+  width: 150%;
+  height: 7rem;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.3rem;
+  background-color: rgb(233, 230, 230);
+  margin-bottom: 20%;
+  margin-left: -20%;
+
+  #quiz-left {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+    place-self: flex-start;
+    white-space: pre-line
+  }
+
+  #quiz-right {
+    display: flex;
+    flex-direction: column;
+    margin-right: 5%;
+  }
+
+  button {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    background-color: transparent;
+    font-size: 3rem;
+    cursor: pointer;
+  }
+
+  button i {
+    margin-bottom: 0.5rem;
+    margin-left: 2rem;
+  }
+
+  button span {
+    font-size: 1.3rem;
+  }
 }

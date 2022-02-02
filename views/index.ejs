@@ -2,19 +2,91 @@
 <html lang="en">
 
 <head>
-  <title>Home Page</title>
+  <title>Quiz App</title>
 
+  <!-- External CSS -->
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400;1,500&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;1,300;1,600&display=swap" rel="stylesheet">
+
+  <!-- App CSS -->
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
 
+  <!-- App JS -->
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
 </head>
 
 <body>
-  <h1>Have fun! 🥔</h1>
+  <!-- Top nav bar (fixed) -->
+  <nav>
+    <form id="logo" method="get" action="/">
+      <button><b>QUIZ</b>app</button>
+    </form>
+    <div class="nav-buttons">
+      <button name="create-quiz">+ Create a Quiz</button>
+      <button name="my-quizzes">My Quizzes</button>
+    </div>
+    <div class="authentication">
+      <span>Welcome, user1!</span>
+    </div>
+  </nav>
+
+  <!-- Page-specific (main) content here -->
+  <main>
+    <!-- Quiz container -->
+    <section class="quiz-container">
+      <article class="quiz">
+        <section id="quiz-left">
+        <div>
+          <span>Quiz 1</span>
+        </div>
+        <div>
+          <span>created by user1</span>
+        </div>
+      </section>
+        <section id="quiz-right">
+          <button name="play-button">
+            <div><i class="fas fa-play-circle"></i></div>
+            <span>Attempt quiz</span>
+        </button>
+        </section>
+      </article>
+      <article class="quiz">
+        <section id="quiz-left">
+        <div>
+          <span>Quiz 2</span>
+        </div>
+        <div>
+          <span>created by user2</span>
+        </div>
+      </section>
+        <section id="quiz-right">
+          <button name="play-button"><i class="fas fa-play-circle"></i></button>
+          <span>Attempt quiz</span>
+        </section>
+      </article>
+      <article class="quiz">
+        <section id="quiz-left">
+        <div>
+          <span>Quiz 3</span>
+        </div>
+        <div>
+          <span>created by user3</span>
+        </div>
+      </section>
+        <section id="quiz-right">
+          <button name="play-button"><i class="fas fa-play-circle"></i></button>
+          <span>Attempt quiz</span>
+        </section>
+      </article>
+    </section>
+  </main>
 </body>
 
 </html>
