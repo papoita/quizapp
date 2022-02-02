@@ -24,18 +24,7 @@
 
 <body>
   <!-- Top nav bar (fixed) -->
-  <nav>
-    <form id="logo" method="get" action="/">
-      <button><b>QUIZ</b>app</button>
-    </form>
-    <div class="nav-buttons">
-      <button name="create-quiz">+ Create a Quiz</button>
-      <button name="my-quizzes">My Quizzes</button>
-    </div>
-    <div class="authentication">
-      <span>Welcome, user1!</span>
-    </div>
-  </nav>
+  <%- include('partials/_header'); %>
 
   <!-- Page-specific (main) content here -->
   <main>
@@ -51,40 +40,13 @@
         </div>
       </section>
         <section id="quiz-right">
+          <form method="get" action="/quiz/:id">
           <button name="play-button">
-            <div><i class="fas fa-play-circle"></i></div>
-            <span>Attempt quiz</span>
+              <div><i class="fas fa-play-circle"></i></div>
+              <span>Attempt quiz</span>
+          </form>
         </button>
         </section>
-      </article>
-      <article class="quiz">
-        <section id="quiz-left">
-        <div>
-          <span>Quiz 2</span>
-        </div>
-        <div>
-          <span>created by user2</span>
-        </div>
-      </section>
-        <section id="quiz-right">
-          <button name="play-button"><i class="fas fa-play-circle"></i></button>
-          <span>Attempt quiz</span>
-        </section>
-      </article>
-      <article class="quiz">
-        <section id="quiz-left">
-        <div>
-          <span>Quiz 3</span>
-        </div>
-        <div>
-          <span>created by user3</span>
-        </div>
-      </section>
-        <section id="quiz-right">
-          <button name="play-button"><i class="fas fa-play-circle"></i></button>
-          <span>Attempt quiz</span>
-        </section>
-      </article>
     </section>
   </main>
 </body>
