@@ -15,6 +15,7 @@
     rel="stylesheet">
 
   <!-- App CSS -->
+  <link rel="stylesheet" href="/styles/index.css" type="text/css" />
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
   <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
@@ -26,49 +27,38 @@
 
 <body>
 
+  <%- include('partials/_header'); %>
 
-  <!-- https://github.com/pedroagont/master-code-g7/blob/master/07_Backend/09_templates-ejs/views/libros.ejs
+    <!-- Top nav bar (fixed) -->
 
-    <ul>
-      <% quizzes.forEach(quiz=> { %>
+    <!-- Page-specific (main) content here -->
+    <main>
+      <!-- Quiz container -->
+      <section class="quizzes-container">
+        <% quizzes.forEach(quiz=> { %>
 
-        <li>
-          <p>Titulo: <%= quiz.titulo %></p>
-          <p>Autor: <%= quiz.autor %></p>
-        </li>
+          <article class="quiz">
+            <div class="quiz-info">
+              <p>
+                <%= quiz.quiz_name %>
+              </p>
+              <p>created by <%= quiz.user_id %>
+              </p>
+            </div>
+            <div class="quiz-attempt">
+              <a href="/quizzes/<%= quiz.id %>">
+                <i class="fas fa-play-circle"></i>
+                <p>Attempt quiz</p>
+              </a>
+            </div>
+          </article>
 
-        <% }); %>
-    </ul>
-    <%- include('partials/_header'); %>
-  -->
-
-  <!-- Top nav bar (fixed) -->
+          <% }); %>
 
 
-  <!-- Page-specific (main) content here -->
-  <main>
-    <!-- Quiz container -->
-    <section class="quiz-container">
-      <article class="quiz">
-        <section class="quiz-left">
-          <div>
-            <span>Quiz 1</span>
-          </div>
-          <div>
-            <span>created by user1</span>
-          </div>
-        </section>
-        <section class="quiz-right">
-          <form method="get" action="/quiz/:id">
-            <button name="play-button">
-              <div><i class="fas fa-play-circle"></i></div>
-              <span>Attempt quiz</span>
-            </button>
-          </form>
-        </section>
-      </article>
-    </section>
-  </main>
+
+      </section>
+    </main>
 </body>
 
 </html>

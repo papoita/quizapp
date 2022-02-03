@@ -1,9 +1,10 @@
 .quiz-container {
   display: flex;
   flex-flow: column;
+  margin-top: 5em;
 }
 
-.quiz{
+.quiz {
   display: flex;
   width: 150%;
   height: 7rem;
@@ -14,8 +15,7 @@
   background-color: rgb(233, 230, 230);
   margin-bottom: 20%;
   margin-left: -20%;
-
-  button {
+  border: button {
     display: flex;
     flex-direction: column;
     border: none;
@@ -39,7 +39,7 @@
   flex-direction: column;
   margin-left: 5%;
   place-self: flex-start;
-  white-space: pre-line
+  white-space: pre-line;
 }
 
 .quiz-right {

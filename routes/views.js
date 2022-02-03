@@ -5,15 +5,32 @@ const router = express.Router();
 
 module.exports = (db) =>
 {
-  // GET HOME ENDPOINT
-  // router.get("/", (req, res) =>
-  // {
-  //   res.render("index");
-  // });
+  //GET HOME ENDPOINT
+  router.get("/", (req, res) =>
+  {
+    res.send("hello");
+  });
+
+  //GET RENDER USER AUTHORIZATION ENDPOINTS
+
+  //register
+  router.get("/register", (req, res) =>
+  {
+    const user = null;
+    res.render("my_quizzes", { user, error: null });
+  });
+
+  //login - display login page
+  router.get("/login", (req, res) =>
+  {
+    return res.render("login", { user, error: null });
+  });
+
+  // GET RENDER QUIZ ENDPOINTS
 
   router.get("/quizzes", (req, res) =>
   {
-    db.query(`SELECT * FROM quizzes WHERE ispublic = true;`)
+    db.query(`SELECT * FROM quizzes WHERE public = true;`)
       .then(data =>
       {
         const quizzes = data.rows;
@@ -31,40 +48,48 @@ module.exports = (db) =>
 
   });
 
-  //GET RENDER USER AUTHORIZATION ENDPOINTS
-
-  //login - display login page
-  router.get("/login", (req, res) =>
-  {
-    return res.render("login", { user, error: null });
-  });
-
-  router.get("/register", (req, res) =>
-  {
-    const user = null;
-    res.render("my_quizzes", { user, error: null });
-  });
-
-  // GET RENDER QUIZ ENDPOINTS
-
   //My quizzes page private requires logged user, this will be the same route as login endpoint because they will have the same look and feel in this case show the list of private quizzes. put login in this route retrieving the user scpecific quizzes
-  router.get("users/:id", (req, res) =>
+  router.get("/myquizzes", (req, res) =>
   {
-    //ejs my_quizzes
-    return res.render("my_quizzes");
+    db.query(`SELECT * FROM quizzes WHERE user_id = 1;`)
+      .then(data =>
+      {
+        const quizzes = data.rows;
+        const templateVars = {
+          quizzes
+        }
+        return res.render("index", templateVars);
+      })
+      .catch(err =>
+      {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+
   });
 
-  router.get("users/:id", (req, res) =>
+  // quizz create form
+  router.get("/quizzes/create", (req, res) =>
   {
-    //ejs my_quizzes
-    return res.render("my_quizzes");
+    const id = req.session.user_id;
+    const user = users[id];
+    if (!user)
+    {
+      return res.redirect("/login");
+    }
+    return res.render("create_quiz", { user });
   });
 
   //see only one quiz or show newly created quiz
-  router.get("/quiz/:id", (req, res) =>
+  router.get("/quizzes/:id", (req, res) =>
   {
+    //quiz belongs to user
+    //const quizBelongsToUser = quiz.user_id === validUser.id;
+    //user logged
+    //user not logged
 
-    db.query(`SELECT * FROM quizzes;`)
+    db.query(`SELECT * FROM quizzes WHERE id = $1;`, [req.params.id])
       .then(data =>
       {
         const users = data.rows;
@@ -80,27 +105,33 @@ module.exports = (db) =>
     res.render("show_quiz");
   });
 
-  // quizz create form
-  router.get("/quiz/create", (req, res) =>
+  //see only one quiz or show newly created quiz
+  router.get("/quizzes/:id/edit", (req, res) =>
   {
-    const id = req.session.user_id;
-    const user = users[id];
-    if (!user)
-    {
-      return res.redirect("/login");
-    }
-    return res.render("create_quiz", { user });
-  });
+    //quiz belongs to user
+    //const quizBelongsToUser = quiz.user_id === validUser.id;
+    //user logged
 
-  // new quiz created shareable link
-  router.get("/quiz/new", (req, res) =>
-  {
-    return res.render("new_quiz", { user });
+
+    db.query(`SELECT * FROM quizzes WHERE id = $1;`, [req.params.id])
+      .then(data =>
+      {
+        const users = data.rows;
+        res.json({ users });
+      })
+      .catch(err =>
+      {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+    //like this name file
+    res.render("show_quiz");
   });
 
   // GET ATTEMPTS ENDPOINTS
   //show result of a specific quiz attempted, make link to share wihtin this route, display in ejs the url if someone want to share it
-  router.get("/attempt/:id/", (req, res) =>
+  router.get("/attempts/:id/", (req, res) =>
   {
     res.render("show_attempt")
   });
