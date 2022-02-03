@@ -30,28 +30,34 @@
 
     <!-- Page-specific (main) content here -->
 
-    <main>
-      <!-- <section class="create-quiz-header">
-        <span class="page-title">Create a new quiz</span>
-        <form method="post" action="">
-            <input type="text" name="quiz-title" placeholder="Enter your quiz title">
-            <label class="switch">
-              <input type="checkbox">
-              <span class="slider round">Public quiz</span>
-            </label>
+    <main class="quiz-create">
+      <form method="post" action="">
+        <header class="create-quiz-header">
+          <div class="page-title">Create a new quiz</div>
+          <div>
+            <input type="text" class="quiz-title" placeholder="Enter your quiz title" required>
+              <label name="is-public" class="switch">
+                <input type="checkbox">
+                <span>Make quiz public</span>
+              </label>
+          </div>
+        </header>
+        <section class="questions-container">
+          <article class="question-box">
+            <div>Question 1</div>
+            <input type="text" class="question-input" name="question" placeholder="Enter question" required>
+            <input type="text" class="answer-input" name="correct-answer" placeholder="Correct answer" required>
+            <input type="text" class="answer-input" name="wrong-answer1" placeholder="Wrong answer" required>
+            <input type="text" class="answer-input" name="wrong-answer2" placeholder="Wrong answer" required>
+            <input type="text" class="answer-input" name="wrong-answer3" placeholder="Wrong answer" required>
+          </article>
+          <footer class="quiz-buttons">
+            <button class="add-question-bttn" name="add-question">+ Add Question</button>
+            <button class="remove-question-bttn" name="remove-question">- Remove Question</button>
+            <button class="create-quiz-bttn" name="create-quiz">Create quiz</button>
+          </footer>
         </section>
-        <section class="question-box">
-            <input type="text" name="question" placeholder="Enter a question">
-            <input type="text" name="correct-answer" placeholder="Correct answer">
-            <input type="text" name="wrong-answer1" placeholder="Wrong answer">
-            <input type="text" name="wrong-answer2" placeholder="Wrong answer">
-            <input type="text" name="wrong-answer3" placeholder="Wrong answer">
-          </section>
-          <section class="quiz-buttons">
-            <button name="add question">+ Add Question</button>
-            <button name="create-quiz">Create quiz</button>
-        </section>
-        </form> -->
+      </form>
     </main>
   </body>
 </html>
