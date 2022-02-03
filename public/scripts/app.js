@@ -8,7 +8,7 @@ const addQuestion = function(questionNumber) {
   <input type="text" class="answer-input" name="question${questionNumber}-wrong-answer2" placeholder="Wrong answer">
   <input type="text" class="answer-input" name="question${questionNumber}-wrong-answer3" placeholder="Wrong answer">
   <button class="remove-question-bttn" data-question="${questionNumber}" type="button" name="remove-question">- Remove Question</button>
-</article>`)
+  </article>`)
 };
 
 
