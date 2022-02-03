@@ -31,22 +31,23 @@
     <!-- Quiz container -->
     <section class="quiz-container">
       <article class="quiz">
-        <section id="quiz-left">
-        <div>
-          <span>Quiz 1</span>
-        </div>
-        <div>
-          <span>created by user1</span>
-        </div>
-      </section>
-        <section id="quiz-right">
+        <section class="quiz-left">
+          <div>
+            <span>Quiz 1</span>
+          </div>
+          <div>
+            <span>created by user1</span>
+          </div>
+        </section>
+        <section class="quiz-right">
           <form method="get" action="/quiz/:id">
-          <button name="play-button">
+            <button name="play-button">
               <div><i class="fas fa-play-circle"></i></div>
               <span>Attempt quiz</span>
+            </button>
           </form>
-        </button>
         </section>
+      </article>
     </section>
   </main>
 </body>
