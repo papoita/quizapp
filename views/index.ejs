@@ -10,7 +10,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400;1,500&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;1,300;1,600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400;1,500&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;1,300;1,600&display=swap"
+    rel="stylesheet">
 
   <!-- App CSS -->
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
@@ -23,32 +25,46 @@
 </head>
 
 <body>
+
+
+  <!-- https://github.com/pedroagont/master-code-g7/blob/master/07_Backend/09_templates-ejs/views/libros.ejs
+
+    <ul>
+      <% quizzes.forEach(quiz=> { %>
+
+        <li>
+          <p>Titulo: <%= quiz.titulo %></p>
+          <p>Autor: <%= quiz.autor %></p>
+        </li>
+
+        <% }); %>
+    </ul> -->
   <!-- Top nav bar (fixed) -->
   <%- include('partials/_header'); %>
 
-  <!-- Page-specific (main) content here -->
-  <main>
-    <!-- Quiz container -->
-    <section class="quiz-container">
-      <article class="quiz">
-        <section id="quiz-left">
-        <div>
-          <span>Quiz 1</span>
-        </div>
-        <div>
-          <span>created by user1</span>
-        </div>
+    <!-- Page-specific (main) content here -->
+    <main>
+      <!-- Quiz container -->
+      <section class="quiz-container">
+        <article class="quiz">
+          <section id="quiz-left">
+            <div>
+              <span>Quiz 1</span>
+            </div>
+            <div>
+              <span>created by user1</span>
+            </div>
+          </section>
+          <section id="quiz-right">
+            <form method="get" action="/quiz/:id">
+              <button name="play-button">
+                <div><i class="fas fa-play-circle"></i></div>
+                <span>Attempt quiz</span>
+            </form>
+            </button>
+          </section>
       </section>
-        <section id="quiz-right">
-          <form method="get" action="/quiz/:id">
-          <button name="play-button">
-              <div><i class="fas fa-play-circle"></i></div>
-              <span>Attempt quiz</span>
-          </form>
-        </button>
-        </section>
-    </section>
-  </main>
+    </main>
 </body>
 
 </html>

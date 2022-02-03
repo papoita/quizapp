@@ -5,21 +5,67 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-const express = require('express');
-const router  = express.Router();
+//CREATE
+//router.post("/", (...))
 
-module.exports = (db) => {
-  router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
-      .then(data => {
-        const users = data.rows;
-        res.json({ users });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
+//READALL
+//router.get("/", (...))
+//views folder -res.render
+
+//READONE
+//router.get("/:id", (...))
+//views folder -res.render
+
+//UPDATE
+//router.put("/:id/edit", (...))
+
+//DELETE
+//router.delete("/:id/delete", (...))
+
+//DESTROY
+//router.delete("/:id/destroy", (...))
+
+
+const express = require('express');
+const router = express.Router();
+
+
+module.exports = (db) =>
+{
+  //CREATE
+  //router.post("/", (...))
+
+  //register
+  router.post("/register", (req, res) =>
+  {
+    const email = req.body.email;
+    const password = req.body.password;
+    const userExists = findUserByEmail(email, users);
+    if (userExists)
+    {
+      res.status(403);
+      return res.render("/login", {
+        user: null,
+        error: "Try loging in: email already in use",
       });
+    }
+  });
+
+  //login - requires user exists
+  router.post("/login", (req, res) =>
+  {
+    const email = req.body.email;
+    const password = req.body.password;
+    return res.redirect("/my_quizzes");
+  });
+
+  //logout
+  router.post("/logout", (req, res) =>
+  {
+    req.session = null;
+    return res.redirect("/");
   });
   return router;
 };
+
+
