@@ -6,10 +6,10 @@ const router = express.Router();
 module.exports = (db) =>
 {
   // GET HOME ENDPOINT
-  router.get("/", (req, res) =>
-  {
-    res.render("index");
-  });
+  // router.get("/", (req, res) =>
+  // {
+  //   res.render("index");
+  // });
 
   router.get("/quizzes", (req, res) =>
   {
