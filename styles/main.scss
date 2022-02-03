@@ -5,53 +5,6 @@ body {
   align-items: flex-start;
 }
 
-.quiz-container {
-  margin-top: 35%;
-  display: flex;
-  flex-flow: column;
-}
-
-.quiz{
-  display: flex;
-  width: 150%;
-  height: 7rem;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 1.3rem;
-  background-color: rgb(233, 230, 230);
-  margin-bottom: 20%;
-  margin-left: -20%;
-
-  #quiz-left {
-    display: flex;
-    flex-direction: column;
-    margin-left: 5%;
-    place-self: flex-start;
-    white-space: pre-line
-  }
-
-  #quiz-right {
-    display: flex;
-    flex-direction: column;
-    margin-right: 5%;
-  }
-
-  button {
-    display: flex;
-    flex-direction: column;
-    border: none;
-    background-color: transparent;
-    font-size: 3rem;
-    cursor: pointer;
-  }
-
-  button i {
-    margin-bottom: 0.5rem;
-    margin-left: 2rem;
-  }
-
-  button span {
-    font-size: 1.3rem;
-  }
+main {
+  margin-top: 7%;
 }
