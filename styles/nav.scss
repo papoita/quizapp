@@ -20,7 +20,7 @@ nav {
   }
 }
 
-#logo button {
+.logo button {
   margin-left: 5%;
   margin-right: 5%;
   font-size: 1.5rem;
@@ -30,6 +30,10 @@ nav {
 .nav-buttons {
   display: flex;
   margin-left: 1.5%;
+
+  .create-quiz {
+    margin-right: 1rem;
+  }
 }
 
 .authentication {
