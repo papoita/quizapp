@@ -6,9 +6,29 @@ const router = express.Router();
 module.exports = (db) =>
 {
   // GET HOME ENDPOINT
-  router.get("/", (req, res) =>
+  app.get("/", (req, res) =>
   {
-    return res.render("index");
+    res.render("index");
+  });
+
+  router.get("/quizzes", (req, res) =>
+  {
+    db.query(`SELECT * FROM quizzes WHERE ispublic = true;`)
+      .then(data =>
+      {
+        const quizzes = data.rows;
+        const templateVars = {
+          quizzes
+        }
+        return res.render("index", templateVars);
+      })
+      .catch(err =>
+      {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+
   });
 
   //GET RENDER USER AUTHORIZATION ENDPOINTS
@@ -17,6 +37,12 @@ module.exports = (db) =>
   router.get("/login", (req, res) =>
   {
     return res.render("login", { user, error: null });
+  });
+
+  router.get("/register", (req, res) =>
+  {
+    const user = null;
+    res.render("my_quizzes", { user, error: null });
   });
 
   // GET RENDER QUIZ ENDPOINTS
@@ -57,6 +83,12 @@ module.exports = (db) =>
   // quizz create form
   router.get("/quiz/create", (req, res) =>
   {
+    const id = req.session.user_id;
+    const user = users[id];
+    if (!user)
+    {
+      return res.redirect("/login");
+    }
     return res.render("create_quiz", { user });
   });
 
@@ -71,6 +103,12 @@ module.exports = (db) =>
   router.get("/attempt/:id/", (req, res) =>
   {
     res.render("show_attempt")
+  });
+
+  router.get("*", (req, res) =>
+  {
+    //puede ser otro render not-found-404.ejs
+    res.send("Page not found");
   });
 
   return router;

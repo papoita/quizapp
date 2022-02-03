@@ -12,7 +12,8 @@ module.exports = (db) =>
   //create a quiz
   router.post("/new", (req, res) =>
   {
-    res.redirect("/quiz/:id");
+
+    res.redirect("/quiz/:id", { user });
   });
 
   // edit quiz or its visibility (public or private)

@@ -55,17 +55,7 @@ app.use("/api/attempt", attemptRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 //this goes to views
-//app.use("/", viewsRoutes(db));
-app.get("/", (req, res) =>
-{
-  res.render("index");
-});
-
-app.get("* ", (req, res) =>
-{
-  //puede ser otro render not-found-404.ejs
-  res.send("Page not found");
-});
+app.use("/", viewsRoutes(db));
 
 
 app.listen(PORT, () =>
