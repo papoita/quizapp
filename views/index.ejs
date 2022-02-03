@@ -42,29 +42,30 @@
   <!-- Top nav bar (fixed) -->
   <%- include('partials/_header'); %>
 
-    <!-- Page-specific (main) content here -->
-    <main>
-      <!-- Quiz container -->
-      <section class="quiz-container">
-        <article class="quiz">
-          <section id="quiz-left">
-            <div>
-              <span>Quiz 1</span>
-            </div>
-            <div>
-              <span>created by user1</span>
-            </div>
-          </section>
-          <section id="quiz-right">
-            <form method="get" action="/quiz/:id">
-              <button name="play-button">
-                <div><i class="fas fa-play-circle"></i></div>
-                <span>Attempt quiz</span>
-            </form>
+  <!-- Page-specific (main) content here -->
+  <main>
+    <!-- Quiz container -->
+    <section class="quiz-container">
+      <article class="quiz">
+        <section class="quiz-left">
+          <div>
+            <span>Quiz 1</span>
+          </div>
+          <div>
+            <span>created by user1</span>
+          </div>
+        </section>
+        <section class="quiz-right">
+          <form method="get" action="/quiz/:id">
+            <button name="play-button">
+              <div><i class="fas fa-play-circle"></i></div>
+              <span>Attempt quiz</span>
             </button>
-          </section>
-      </section>
-    </main>
+          </form>
+        </section>
+      </article>
+    </section>
+  </main>
 </body>
 
 </html>
