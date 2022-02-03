@@ -6,7 +6,7 @@ const router = express.Router();
 module.exports = (db) =>
 {
   // GET HOME ENDPOINT
-  app.get("/", (req, res) =>
+  router.get("/", (req, res) =>
   {
     res.render("index");
   });

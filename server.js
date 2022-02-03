@@ -42,6 +42,8 @@ const quizRoutes = require("./routes/quiz");
 
 const attemptRoutes = require("./routes/quiz");
 
+const viewsRoutes = require("./routes/views")
+
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
