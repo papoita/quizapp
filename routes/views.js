@@ -8,7 +8,7 @@ module.exports = (db) =>
   //GET HOME ENDPOINT
   router.get("/", (req, res) =>
   {
-    res.send("hello");
+    res.send("Welcome to QUIZAPP: the best way to test your knowledge");
   });
 
   //GET RENDER USER AUTHORIZATION ENDPOINTS
@@ -78,7 +78,7 @@ module.exports = (db) =>
     {
       return res.redirect("/login");
     }
-    return res.render("create_quiz", { user });
+    return res.render("create_quiz", user);
   });
 
   //see only one quiz or show newly created quiz
@@ -131,6 +131,13 @@ module.exports = (db) =>
 
   // GET ATTEMPTS ENDPOINTS
   //show result of a specific quiz attempted, make link to share wihtin this route, display in ejs the url if someone want to share it
+  //RENDER all
+  router.get("/attempts", (req, res) =>
+  {
+    res.render("show_attempt")
+  });
+
+  //RENDER one
   router.get("/attempts/:id/", (req, res) =>
   {
     res.render("show_attempt")
