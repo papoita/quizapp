@@ -1,2 +1,11 @@
-INSERT INTO users (id, user_name)
-VALUES (1, 'Molly');
+INSERT INTO users (username)
+VALUES ('Molly');
+
+INSERT INTO users (username)
+VALUES ('Tony');
+
+INSERT INTO users (username)
+VALUES ('Paola');
+
+INSERT INTO users (username)
+VALUES ('Marcos');
