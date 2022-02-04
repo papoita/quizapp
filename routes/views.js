@@ -72,13 +72,7 @@ module.exports = (db) =>
   // quizz create form
   router.get("/quizzes/create", (req, res) =>
   {
-    const id = req.session.user_id;
-    const user = users[id];
-    if (!user)
-    {
-      return res.redirect("/login");
-    }
-    return res.render("create_quiz", user);
+    return res.render("quiz_create");
   });
 
   //see only one quiz or show newly created quiz
