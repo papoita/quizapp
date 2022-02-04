@@ -6,19 +6,19 @@ module.exports = (db) =>
   //CREATE
   router.post("/", (req, res) =>
   {
-    const { user_id } = req.session;
-    //const user_id = 1;
-    if (!user_id)
-    {
-      return res.status(400).send({ message: "User is not logged in" })
-    }
+    //const { user_id } = req.session;
+    const user_id = 1;
+    // if (!user_id)
+    // {
+    //   return res.status(400).send({ message: "User is not logged in" })
+    // }
 
-    const validUser = db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]).then(data => data.rows[0]);
-    if (!validUser)
-    {
-      return res.status(400).send({ message: "User session is not valid" })
-    }
-    console.log(req);
+    // const validUser = db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]).then(data => data.rows[0]);
+    // if (!validUser)
+    // {
+    //   return res.status(400).send({ message: "User session is not valid" })
+    // }
+    console.log(req.body);
     const { quiz_name, public } = req.body;
     if (!quiz_name)
     {
@@ -27,7 +27,8 @@ module.exports = (db) =>
       })
     }
 
-    const quiz = db.query(`INSERT INTO quizzes (quiz_name, user_id, public) VALUES($1, $2, $3) RETURNING *;`, [quiz_name, validUser.id, public]).then(data => data.rows[0]);
+    //no user_id insterted right?
+    const quiz = db.query(`INSERT INTO quizzes (quiz_name, user_id, public) VALUES($1, $2, $3) RETURNING *;`, [quiz_name, user_id, public]).then(data => data.rows[0]);
     return res.status(201).send({ message: "Quiz Created!", quiz })
   });
 
@@ -35,18 +36,18 @@ module.exports = (db) =>
   //all
   router.get("/", (req, res) =>
   {
-    //const user_id = 1;
-    const { user_id } = req.session;
-    if (!user_id)
-    {
-      return res.status(400).send({ message: "User is not logged in" })
-    }
+    const user_id = 1;
+    // const { user_id } = req.session;
+    // if (!user_id)
+    // {
+    //   return res.status(400).send({ message: "User is not logged in" })
+    // }
 
-    const validUser = db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]).then(data => data.rows[0]);
-    if (!validUser)
-    {
-      return res.status(400).send({ message: "User session is not valid" })
-    }
+    // const validUser = db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]).then(data => data.rows[0]);
+    // if (!validUser)
+    // {
+    //   return res.status(400).send({ message: "User session is not valid" })
+    // }
 
     const quizzes = db.query(`SELECT * FROM quizzes;`).then(data => data.rows);
     return res.status(201).send({ message: "List of all quizzes", quizzes })
@@ -55,17 +56,18 @@ module.exports = (db) =>
   //one
   router.get("/:id", (req, res) =>
   {
+    const user_id = 1;
     const { user_id } = req.session;
-    if (!user_id)
-    {
-      return res.status(400).send({ message: "User is not logged in" })
-    }
+    // if (!user_id)
+    // {
+    //   return res.status(400).send({ message: "User is not logged in" })
+    // }
 
-    const validUser = db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]).then(data => data.rows[0]);
-    if (!validUser)
-    {
-      return res.status(400).send({ message: "User session is not valid" })
-    }
+    // const validUser = db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]).then(data => data.rows[0]);
+    // if (!validUser)
+    // {
+    //   return res.status(400).send({ message: "User session is not valid" })
+    // }
 
     const quiz = db.query(`SELECT * FROM quizzes WHERE id = $1;`, [req.params.id]).then(data => data.rows[0]);
     return res.status(201).send({ message: "Quiz found", quiz })
@@ -75,16 +77,16 @@ module.exports = (db) =>
   router.put("/:id/edit", (req, res) =>
   {
     const { user_id } = req.session;
-    if (!user_id)
-    {
-      return res.status(400).send({ message: "User is not logged in" })
-    }
+    // if (!user_id)
+    // {
+    //   return res.status(400).send({ message: "User is not logged in" })
+    // }
 
-    const validUser = db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]).then(data => data.rows[0]);
-    if (!validUser)
-    {
-      return res.status(400).send({ message: "User session is not valid" })
-    }
+    // const validUser = db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]).then(data => data.rows[0]);
+    // if (!validUser)
+    // {
+    //   return res.status(400).send({ message: "User session is not valid" })
+    // }
 
     const quiz = db.query(`SELECT * FROM quizzes WHERE id = $1;`, [req.params.id]).then(data => data.rows[0]);
     if (!quiz)
@@ -94,7 +96,7 @@ module.exports = (db) =>
       })
     }
 
-    const quizBelongsToUser = quiz.user_id === validUser.id;
+    const quizBelongsToUser = quiz.user_id === user.id;
     if (!quizBelongsToUser)
     {
       return res.status(400).send({ message: "You are not the owner of this quiz" })
@@ -104,28 +106,28 @@ module.exports = (db) =>
     if (!quiz_name || !public)
     {
       return res.status(400).send({
-        message: "A quizz needs a quiz_name and a public property"
+        message: "A quiz needs a quiz_name and a public property"
       })
     }
 
-    const upadtedQuiz = db.query(`UPDATE quizzes SET quiz_name = $1, public = $2 WHERE id = $3 RETURNING *`, [quiz_name, public, req.params.id])
-    return res.status(200).send({ message: "Quiz Updated!", quiz: upadtedQuiz })
+    const updatedQuiz = db.query(`UPDATE quizzes SET quiz_name = $1, public = $2 WHERE id = $3 RETURNING *`, [quiz_name, public, req.params.id])
+    return res.status(200).send({ message: "Quiz Updated!", quiz: updatedQuiz })
   });
 
   //DELETE
   router.delete("/:id/delete", (req, res) =>
   {
     const { user_id } = req.session;
-    if (!user_id)
-    {
-      return res.status(400).send({ message: "User is not logged in" })
-    }
+    // if (!user_id)
+    // {
+    //   return res.status(400).send({ message: "User is not logged in" })
+    // }
 
-    const validUser = db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]).then(data => data.rows[0]);
-    if (!validUser)
-    {
-      return res.status(400).send({ message: "User session is not valid" })
-    }
+    // const validUser = db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]).then(data => data.rows[0]);
+    // if (!validUser)
+    // {
+    //   return res.status(400).send({ message: "User session is not valid" })
+    // }
 
     const quiz = db.query(`SELECT * FROM quizzes WHERE id = $1;`, [req.params.id]).then(data => data.rows[0]);
     if (!quiz)
@@ -135,7 +137,7 @@ module.exports = (db) =>
       })
     }
 
-    const quizBelongsToUser = quiz.user_id === validUser.id;
+    const quizBelongsToUser = quiz.user_id === user_id;
     if (!quizBelongsToUser)
     {
       return res.status(400).send({ message: "You are not the owner of this quiz" })
