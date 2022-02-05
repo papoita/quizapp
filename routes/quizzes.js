@@ -6,37 +6,55 @@ module.exports = (db) =>
   //CREATE
   router.post("/", (req, res) =>
   {
-    const { user_id } = req.session;
-    //const user_id = 1;
+    // const { user_id } = req.session;
+    const user_id = 1;
+    let public = req.body.public || "FALSE";
+    const date = new Date().toJSON().slice(0,10);
+    // const validUser = db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]).then(data => data.rows[0]);
+
     if (!user_id)
     {
       return res.status(400).send({ message: "User is not logged in" })
     }
 
-    const validUser = db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]).then(data => data.rows[0]);
-    if (!validUser)
-    {
-      return res.status(400).send({ message: "User session is not valid" })
-    }
-    console.log(req);
-    const { quiz_name, public } = req.body;
-    if (!quiz_name)
+    // if (!validUser)
+    // {
+    //   return res.status(400).send({ message: "User session is not valid" })
+    // }
+
+    if (!req.body.quiz_name)
     {
       return res.status(400).send({
-        message: "A quizz needs a quiz_name"
+        Error: "A quiz needs a quiz name!"
       })
     }
 
-    const quiz = db.query(`INSERT INTO quizzes (quiz_name, user_id, public) VALUES($1, $2, $3) RETURNING *;`, [quiz_name, validUser.id, public]).then(data => data.rows[0]);
-    return res.status(201).send({ message: "Quiz Created!", quiz })
+    // Helper Function
+    const addQuestionsToDb = (object, id) => {
+    for(let i = 0; i < object.question.length; i++) {
+      db.query(`INSERT INTO questions (question, answer_1, answer_2, answer_3, answer_correct, quiz_id)
+      VALUES ($1, $2, $3, $4, $5, $6);`, [object.question[i], object.wrong_answer1[i], object.wrong_answer2[i], object.wrong_answer3[i], object.correct_answer[i], id])
+      }
+    return;
+    };
+
+   db.query(`INSERT INTO quizzes (quiz_name, user_id, date, public) VALUES($1, $2, $3, $4) RETURNING *;`, [req.body.quiz_name, user_id, date, public])
+    .then(data => {
+      const id = data.rows[0].id;
+
+      addQuestionsToDb(req.body,id)
+
+      return res.status(201).send("Quiz Created!");
+
+    })
   });
 
   //READ
   //all
   router.get("/", (req, res) =>
   {
-    //const user_id = 1;
-    const { user_id } = req.session;
+    const user_id = 1;
+    // const { user_id } = req.session;
     if (!user_id)
     {
       return res.status(400).send({ message: "User is not logged in" })
