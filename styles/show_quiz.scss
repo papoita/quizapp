@@ -13,6 +13,8 @@
 .question-box {
   background-color: rgb(226, 223, 223);
   margin-bottom: 1rem;
+  padding: 1rem;
+  padding-top: 0.1rem;
 
   .show-quiz-alternatives {
     display: flex;
@@ -21,6 +23,7 @@
 
   input {
     margin-bottom: 1rem;
+    margin-right: 0.5rem;
   }
 }
 
