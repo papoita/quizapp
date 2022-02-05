@@ -70,7 +70,7 @@ module.exports = (db) =>
     return res.status(201).send({ message: "List of all quizzes", quizzes })
   });
 
-  //one
+  // attempt quiz //api/quizzes/:id
   router.get("/:id", (req, res) =>
   {
     // const { user_id } = req.session;
@@ -90,87 +90,94 @@ module.exports = (db) =>
     // const quiz_id = db.query(`SELECT * FROM questions JOIN quizzes on questions.quiz_id = quizzes.id WHERE questions.quiz_id = $1;`, [quiz_id])
     // .then(data => data.rows[0]);
 
-    const quiz = db.query(`SELECT * FROM questions JOIN quizzes on questions.quiz_id = quizzes.id WHERE questions.quiz_id = $1;`, [req.params.id])
+    db.query(`SELECT * FROM questions JOIN quizzes on questions.quiz_id = quizzes.id WHERE questions.quiz_id = $1;`, [req.params.id])
     .then(data => {
 
-      const quiz_test = data.rows;
-      return res.status(201).send({ quiz_test });
-    });
+      const quiz = data.rows;
+      const templateVars = { quiz: quiz };
+      console.log(quiz);
+
+      return res.render("quiz_attempt", templateVars);
+      // return res.redirect("/");
+      // return res.status(201).send({ quiz });
+    })
   });
+
+
 
   //UPDATE
-  router.put("/:id/edit", (req, res) =>
-  {
-    const { user_id } = req.session;
-    if (!user_id)
-    {
-      return res.status(400).send({ message: "User is not logged in" })
-    }
+  // router.put("/:id/edit", (req, res) =>
+  // {
+  //   const { user_id } = req.session;
+  //   if (!user_id)
+  //   {
+  //     return res.status(400).send({ message: "User is not logged in" })
+  //   }
 
-    const validUser = db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]).then(data => data.rows[0]);
-    if (!validUser)
-    {
-      return res.status(400).send({ message: "User session is not valid" })
-    }
+  //   const validUser = db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]).then(data => data.rows[0]);
+  //   if (!validUser)
+  //   {
+  //     return res.status(400).send({ message: "User session is not valid" })
+  //   }
 
-    const quiz = db.query(`SELECT * FROM quizzes WHERE id = $1;`, [req.params.id]).then(data => data.rows[0]);
-    if (!quiz)
-    {
-      return res.status(400).send({
-        message: "quiz not found"
-      })
-    }
+  //   const quiz = db.query(`SELECT * FROM quizzes WHERE id = $1;`, [req.params.id]).then(data => data.rows[0]);
+  //   if (!quiz)
+  //   {
+  //     return res.status(400).send({
+  //       message: "quiz not found"
+  //     })
+  //   }
 
-    const quizBelongsToUser = quiz.user_id === validUser.id;
-    if (!quizBelongsToUser)
-    {
-      return res.status(400).send({ message: "You are not the owner of this quiz" })
-    }
+  //   const quizBelongsToUser = quiz.user_id === validUser.id;
+  //   if (!quizBelongsToUser)
+  //   {
+  //     return res.status(400).send({ message: "You are not the owner of this quiz" })
+  //   }
 
-    const { quiz_name, public } = req.body;
-    if (!quiz_name || !public)
-    {
-      return res.status(400).send({
-        message: "A quizz needs a quiz_name and a public property"
-      })
-    }
+  //   const { quiz_name, public } = req.body;
+  //   if (!quiz_name || !public)
+  //   {
+  //     return res.status(400).send({
+  //       message: "A quizz needs a quiz_name and a public property"
+  //     })
+  //   }
 
-    const upadtedQuiz = db.query(`UPDATE quizzes SET quiz_name = $1, public = $2 WHERE id = $3 RETURNING *`, [quiz_name, public, req.params.id])
-    return res.status(200).send({ message: "Quiz Updated!", quiz: upadtedQuiz })
-  });
+  //   const upadtedQuiz = db.query(`UPDATE quizzes SET quiz_name = $1, public = $2 WHERE id = $3 RETURNING *`, [quiz_name, public, req.params.id])
+  //   return res.status(200).send({ message: "Quiz Updated!", quiz: upadtedQuiz })
+  // });
 
   //DELETE
-  router.delete("/:id/delete", (req, res) =>
-  {
-    const { user_id } = req.session;
-    if (!user_id)
-    {
-      return res.status(400).send({ message: "User is not logged in" })
-    }
+//   router.delete("/:id/delete", (req, res) =>
+//   {
+//     const { user_id } = req.session;
+//     if (!user_id)
+//     {
+//       return res.status(400).send({ message: "User is not logged in" })
+//     }
 
-    const validUser = db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]).then(data => data.rows[0]);
-    if (!validUser)
-    {
-      return res.status(400).send({ message: "User session is not valid" })
-    }
+//     const validUser = db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]).then(data => data.rows[0]);
+//     if (!validUser)
+//     {
+//       return res.status(400).send({ message: "User session is not valid" })
+//     }
 
-    const quiz = db.query(`SELECT * FROM quizzes WHERE id = $1;`, [req.params.id]).then(data => data.rows[0]);
-    if (!quiz)
-    {
-      return res.status(400).send({
-        message: "quiz not found"
-      })
-    }
+//     const quiz = db.query(`SELECT * FROM quizzes WHERE id = $1;`, [req.params.id]).then(data => data.rows[0]);
+//     if (!quiz)
+//     {
+//       return res.status(400).send({
+//         message: "quiz not found"
+//       })
+//     }
 
-    const quizBelongsToUser = quiz.user_id === validUser.id;
-    if (!quizBelongsToUser)
-    {
-      return res.status(400).send({ message: "You are not the owner of this quiz" })
-    }
+//     const quizBelongsToUser = quiz.user_id === validUser.id;
+//     if (!quizBelongsToUser)
+//     {
+//       return res.status(400).send({ message: "You are not the owner of this quiz" })
+//     }
 
-    db.query(`DELETE FROM quizzes WHERE id = $1`, [req.params.id])
-    return res.status(204).send()
-  });
+//     db.query(`DELETE FROM quizzes WHERE id = $1`, [req.params.id])
+//     return res.status(204).send()
+//   });
 
 
   return router;
