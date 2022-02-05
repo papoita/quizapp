@@ -13,11 +13,11 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400;1,500&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;1,300;1,600&display=swap"
     rel="stylesheet">
-
-  <!-- App CSS -->
-  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
+    <!-- App CSS -->
+    <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/quiz_create.css" type="text/css" />
 
   <!-- App JS -->
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
@@ -45,6 +45,23 @@
         <section id="quiz-buttons">
           <button type="submit">Create quiz</button>
         </section>
+    <main class="quiz-create">
+      <form method="post" action="">
+        <header class="create-quiz-header">
+          <h4 class="page-title">Create a new quiz</h4>
+          <div>
+            <input type="text" class="quiz-title" placeholder="Enter your quiz title">
+              <label name="is-public" class="switch">
+                <input type="checkbox"> Make quiz public
+              </label>
+          </div>
+        </header>
+        <section class="questions-container">
+        </section>
+        <footer class="quiz-buttons">
+          <button class="add-question-bttn" type="button" name="add-question">+ Add Question</button>
+          <button class="create-quiz-bttn" type="submit" name="create-quiz">Create quiz</button>
+        </footer>
       </form>
     </main>
 </body> -->
