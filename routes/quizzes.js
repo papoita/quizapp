@@ -73,7 +73,9 @@ module.exports = (db) =>
   //one
   router.get("/:id", (req, res) =>
   {
-    const { user_id } = req.session;
+    // const { user_id } = req.session;
+    const user_id = 1;
+
     if (!user_id)
     {
       return res.status(400).send({ message: "User is not logged in" })
@@ -85,8 +87,15 @@ module.exports = (db) =>
       return res.status(400).send({ message: "User session is not valid" })
     }
 
-    const quiz = db.query(`SELECT * FROM quizzes WHERE id = $1;`, [req.params.id]).then(data => data.rows[0]);
-    return res.status(201).send({ message: "Quiz found", quiz })
+    // const quiz_id = db.query(`SELECT * FROM questions JOIN quizzes on questions.quiz_id = quizzes.id WHERE questions.quiz_id = $1;`, [quiz_id])
+    // .then(data => data.rows[0]);
+
+    const quiz = db.query(`SELECT * FROM questions JOIN quizzes on questions.quiz_id = quizzes.id WHERE questions.quiz_id = $1;`, [req.params.id])
+    .then(data => {
+
+      const quiz_test = data.rows;
+      return res.status(201).send({ quiz_test });
+    });
   });
 
   //UPDATE

@@ -5,11 +5,11 @@ const router = express.Router();
 
 module.exports = (db) =>
 {
-  //GET HOME ENDPOINT
-  router.get("/", (req, res) =>
-  {
-    res.send("Welcome to QUIZAPP: the best way to test your knowledge");
-  });
+
+  // router.get("/", (req, res) =>
+  // {
+  //   res.send("Welcome to QUIZAPP: the best way to test your knowledge");
+  // });
 
   //GET RENDER USER AUTHORIZATION ENDPOINTS
 
@@ -28,7 +28,8 @@ module.exports = (db) =>
 
   // GET RENDER QUIZ ENDPOINTS
 
-  router.get("/quizzes", (req, res) =>
+  //GET HOME ENDPOINT
+  router.get("/", (req, res) =>
   {
     db.query(`SELECT * FROM quizzes WHERE public = true;`)
       .then(data =>
