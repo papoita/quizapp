@@ -8,7 +8,7 @@ module.exports = (db) =>
   {
     // const { user_id } = req.session;
     const user_id = 1;
-    let public = req.body.public || "FALSE";
+    let public = req.body.is_public || "FALSE";
     const date = new Date().toJSON().slice(0,10);
     // const validUser = db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]).then(data => data.rows[0]);
 
@@ -41,7 +41,7 @@ module.exports = (db) =>
    db.query(`INSERT INTO quizzes (quiz_name, user_id, date, public) VALUES($1, $2, $3, $4) RETURNING *;`, [req.body.quiz_name, user_id, date, public])
     .then(data => {
       const id = data.rows[0].id;
-
+      console.log(req.body);
       addQuestionsToDb(req.body,id)
 
       return res.status(201).send("Quiz Created!");
