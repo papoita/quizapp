@@ -57,7 +57,7 @@ module.exports = (db) =>
   router.get("/:id", (req, res) =>
   {
     const user_id = 1;
-    const { user_id } = req.session;
+    // const { user_id } = req.session;
     // if (!user_id)
     // {
     //   return res.status(400).send({ message: "User is not logged in" })
