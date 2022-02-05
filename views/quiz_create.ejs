@@ -32,7 +32,7 @@
 
     <!-- Page-specific (main) content here -->
 
-    <main>
+    <!-- <main>
       <form method="post" action="/api/quizzes">
         <section id="create-quiz-header">
           <span id="page-title">Create a new quiz</span>
@@ -47,34 +47,36 @@
         </section>
       </form>
     </main>
-</body>
+</body> -->
 
-</html>
-<!--
-previous version
+<!-- previous version -->
 <main>
-  <form method="post" action="">
+  <form method="post" action="/api/quizzes">
     <section id="create-quiz-header">
       <span id="page-title">Create a new quiz</span>
 
-      <input type="text" name="quiz-title" placeholder="Enter your quiz title">
+      <input type="text" name="quiz_name" placeholder="Enter your quiz title" required>
       <label class="switch">
-        <input type="checkbox">
+        <input type="checkbox" name="public" value="TRUE">
         <span class="slider round">Public quiz</span>
       </label>
-    </section>
-    <section id="question-box">
-      <input type="text" name="question" placeholder="Enter a question">
-      <input type="text" name="correct-answer" placeholder="Correct answer">
-      <input type="text" name="wrong-answer1" placeholder="Wrong answer">
-      <input type="text" name="wrong-answer2" placeholder="Wrong answer">
-      <input type="text" name="wrong-answer3" placeholder="Wrong answer">
-    </section>
-    <section id="quiz-buttons">
-      <button name="add question">+ Add Question</button>
-      <button name="create-quiz">Create quiz</button>
+    <div id="questions">
+      <section class="question-box">
+        <h2>Question 1</h2>
+        <input type="text" name="question" placeholder="Enter a question" required>
+        <input type="text" name="correct_answer" placeholder="Correct answer" required>
+        <input type="text" name="wrong_answer1" placeholder="Wrong answer" required>
+        <input type="text" name="wrong_answer2" placeholder="Wrong answer" required>
+        <input type="text" name="wrong_answer3" placeholder="Wrong answer" required>
+      </section>
+    </div>
+    <section >
+      <button id="add-question" name="add question">+ Add Question</button>
+      <button id="quiz-button" name="create-quiz">Create quiz</button>
     </section>
   </form>
 </main>
 </body>
--->
+
+</html>
+
