@@ -1,50 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>Quiz App</title>
 
-<head>
-  <title>Quiz App</title>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400;1,500&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;1,300;1,600&display=swap" rel="stylesheet">
 
-  <!-- External CSS -->
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400;1,500&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;1,300;1,600&display=swap"
-    rel="stylesheet">
     <!-- App CSS -->
     <link rel="stylesheet" href="/styles/main.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/header.css" type="text/css" />
     <link rel="stylesheet" href="/styles/quiz_create.css" type="text/css" />
 
-  <!-- App JS -->
-  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-  <script type="text/javascript" src="/scripts/app.js"></script>
-</head>
+    <!-- App JS -->
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+  </head>
 
-<body>
+  <body>
 
-  <!-- Top nav bar (fixed) -->
+    <!-- Top nav bar (fixed) -->
 
-  <%- include('partials/_header'); %>
+    <%- include('partials/_header'); %>
 
     <!-- Page-specific (main) content here -->
 
-    <!-- <main>
-      <form method="post" action="/api/quizzes">
-        <section id="create-quiz-header">
-          <span id="page-title">Create a new quiz</span>
-          <input type="text" name="quiz_name" placeholder="Enter your quiz title">
-          <label class="switch">
-            <input type="checkbox" name="quiz_name">
-            <span class="slider round">Public quiz</span>
-          </label>
-        </section>
-        <section id="quiz-buttons">
-          <button type="submit">Create quiz</button>
-        </section>
     <main class="quiz-create">
       <form method="post" action="">
         <header class="create-quiz-header">
@@ -64,36 +49,5 @@
         </footer>
       </form>
     </main>
-</body> -->
-
-<!-- previous version -->
-<main>
-  <form method="post" action="/api/quizzes">
-    <section id="create-quiz-header">
-      <span id="page-title">Create a new quiz</span>
-
-      <input type="text" name="quiz_name" placeholder="Enter your quiz title" required>
-      <label class="switch">
-        <input type="checkbox" name="public" value="TRUE">
-        <span class="slider round">Public quiz</span>
-      </label>
-    <div id="questions">
-      <section class="question-box">
-        <h2>Question 1</h2>
-        <input type="text" name="question" placeholder="Enter a question" required>
-        <input type="text" name="correct_answer" placeholder="Correct answer" required>
-        <input type="text" name="wrong_answer1" placeholder="Wrong answer" required>
-        <input type="text" name="wrong_answer2" placeholder="Wrong answer" required>
-        <input type="text" name="wrong_answer3" placeholder="Wrong answer" required>
-      </section>
-    </div>
-    <section >
-      <button id="add-question" name="add question">+ Add Question</button>
-      <button id="quiz-button" name="create-quiz">Create quiz</button>
-    </section>
-  </form>
-</main>
-</body>
-
+  </body>
 </html>
-
