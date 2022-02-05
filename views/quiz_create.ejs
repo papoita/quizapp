@@ -31,13 +31,13 @@
     <!-- Page-specific (main) content here -->
 
     <main class="quiz-create">
-      <form method="post" action="">
+      <form method="post" action="/api/quizzes">
         <header class="create-quiz-header">
           <h4 class="page-title">Create a new quiz</h4>
           <div>
-            <input type="text" class="quiz-title" placeholder="Enter your quiz title">
+            <input type="text" class="quiz-title" name="quiz_name" placeholder="Enter your quiz title">
               <label name="is-public" class="switch">
-                <input type="checkbox"> Make quiz public
+                <input type="checkbox" name="is_public" value="TRUE"> Make quiz public
               </label>
           </div>
         </header>
