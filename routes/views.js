@@ -5,11 +5,11 @@ const router = express.Router();
 
 module.exports = (db) =>
 {
-  //GET HOME ENDPOINT
-  router.get("/", (req, res) =>
-  {
-    res.send("Welcome to QUIZAPP: the best way to test your knowledge");
-  });
+
+  // router.get("/", (req, res) =>
+  // {
+  //   res.send("Welcome to QUIZAPP: the best way to test your knowledge");
+  // });
 
   //GET RENDER USER AUTHORIZATION ENDPOINTS
 
@@ -28,7 +28,8 @@ module.exports = (db) =>
 
   // GET RENDER QUIZ ENDPOINTS
 
-  router.get("/quizzes", (req, res) =>
+  //GET HOME ENDPOINT
+  router.get("/", (req, res) =>
   {
     db.query(`SELECT * FROM quizzes WHERE public = true;`)
       .then(data =>
@@ -76,65 +77,78 @@ module.exports = (db) =>
   });
 
   //see only one quiz or show newly created quiz
-  router.get("/quizzes/:id", (req, res) =>
-  {
-    //quiz belongs to user
-    //const quizBelongsToUser = quiz.user_id === validUser.id;
-    //user logged
-    //user not logged
+  // router.get("/quizzes/:id", (req, res) =>
+  // {
+  //   //quiz belongs to user
+  //   //const quizBelongsToUser = quiz.user_id === validUser.id;
+  //   //user logged
+  //   //user not logged
 
-    db.query(`SELECT * FROM quizzes WHERE id = $1;`, [req.params.id])
-      .then(data =>
-      {
-        const users = data.rows;
-        res.json({ users });
-      })
-      .catch(err =>
-      {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-    //like this name file
-    res.render("show_quiz");
-  });
+  //   db.query(`SELECT * FROM quizzes WHERE id = $1;`, [req.params.id])
+  //     .then(data =>
+  //     {
+  //       const users = data.rows;
+  //       res.json({ users });
+  //     })
+  //     .catch(err =>
+  //     {
+  //       res
+  //         .status(500)
+  //         .json({ error: err.message });
+  //     });
+  //   //like this name file
+  //   res.render("quiz_attempt");
+  // });
 
   //see only one quiz or show newly created quiz
-  router.get("/quizzes/:id/edit", (req, res) =>
-  {
-    //quiz belongs to user
-    //const quizBelongsToUser = quiz.user_id === validUser.id;
-    //user logged
+  // router.get("/quizzes/:id/edit", (req, res) =>
+  // {
+  //   //quiz belongs to user
+  //   //const quizBelongsToUser = quiz.user_id === validUser.id;
+  //   //user logged
 
 
-    db.query(`SELECT * FROM quizzes WHERE id = $1;`, [req.params.id])
-      .then(data =>
-      {
-        const users = data.rows;
-        res.json({ users });
-      })
-      .catch(err =>
-      {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-    //like this name file
-    res.render("show_quiz");
-  });
+  //   db.query(`SELECT * FROM quizzes WHERE id = $1;`, [req.params.id])
+  //     .then(data =>
+  //     {
+  //       const users = data.rows;
+  //       res.json({ users });
+  //     })
+  //     .catch(err =>
+  //     {
+  //       res
+  //         .status(500)
+  //         .json({ error: err.message });
+  //     });
+  //   //like this name file
+  //   res.render("show_quiz");
+  // });
 
   // GET ATTEMPTS ENDPOINTS
   //show result of a specific quiz attempted, make link to share wihtin this route, display in ejs the url if someone want to share it
   //RENDER all
-  router.get("/attempts", (req, res) =>
-  {
-    res.render("show_attempt")
-  });
+  // router.get("/attempts", (req, res) =>
+  // {
+  //   res.render("show_attempt")
+  // });
 
   //RENDER one
-  router.get("/attempts/:id/", (req, res) =>
+  // router.get("/attempts/:id/", (req, res) =>
+  // {
+  //   res.render("show_attempt")
+  // });
+
+  router.get("/share_quiz", (req, res) =>
   {
-    res.render("show_attempt")
+    //share the link to api/quizzes/:id
+    // we need the user_id, score, and number of quiz questions
+    res.render("test_page"); //placeholder
+  });
+
+  router.get("/share_results", (req, res) =>
+  {
+    //share the link to api/attempts/:id
+    res.render("test_page"); //placeholder
   });
 
   router.get("*", (req, res) =>
@@ -142,6 +156,8 @@ module.exports = (db) =>
     //puede ser otro render not-found-404.ejs
     res.send("Page not found");
   });
+
+
 
   return router;
 };
