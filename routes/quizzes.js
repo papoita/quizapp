@@ -94,7 +94,7 @@ module.exports = (db) =>
     .then(data => {
 
       const quiz = data.rows;
-      const templateVars = { quiz: quiz };
+      const templateVars = { quiz };
       console.log(quiz);
 
       return res.render("quiz_attempt", templateVars);

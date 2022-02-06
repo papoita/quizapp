@@ -36,9 +36,23 @@
     <main>
       <!-- Quiz container -->
       <section class="quizzes-container">
-        <h2><%= quiz%></h2>
-        <h2><%= quiz["quiz"]%></h2>
-        <h2><%= quiz[quiz]%></h2>
+        <!-- <h3><%= JSON.stringify(quiz) %></h3> -->
+        <h3><%= quiz[0].quiz_name %></h3>
+        <!-- <h2><%= quiz["quiz"]%></h2>
+        <h2><%= quiz[quiz]%></h2> -->
+
+        <% for(let quizzes of quiz) { %>
+          <section class="question-box">
+            <div><%= quizzes.question%>
+              <ol>
+                <li><%= quizzes.answer_1 %></li>
+                <li><%= quizzes.answer_2 %></li>
+                <li><%= quizzes.answer_3 %></li>
+                <li><%=quizzes.answer_correct %></li>
+              </ol>
+            </div>
+          </section>
+        <% } %>
 
           <!-- <article class="quiz">
             <div class="quiz-info">
@@ -55,8 +69,6 @@
               </a>
             </div>
           </article> -->
-
-
 
       </section>
     </main>
