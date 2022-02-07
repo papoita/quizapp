@@ -31,7 +31,7 @@ module.exports = (db) =>
   //GET HOME ENDPOINT
   router.get("/", (req, res) =>
   {
-    db.query(`SELECT * FROM quizzes WHERE public = true;`)
+    db.query(`SELECT quizzes.*, users.* FROM quizzes JOIN users ON users.id = quizzes.user_id WHERE public = true;`)
       .then(data =>
       {
         const quizzes = data.rows;

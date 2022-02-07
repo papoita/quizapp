@@ -62,7 +62,6 @@ module.exports = (db) =>
     const user_id = 1;
     const attempt = db.query(`SELECT score, COUNT(questions.id) FROM quiz_attempts JOIN questions ON quiz_attempts.quiz_id = questions.quiz_id WHERE id = $1 GROUP BY score;`, [req.params.id]).then(data => data.rows[0]);
     return res.status(201).send({ message: "attempt found", attempt })
-
   });
 
   //UPDATE

@@ -20,11 +20,9 @@ module.exports = (db) =>
   router.get("/:id", (req, res) =>
   {
     const id = parseInt(req.params.id);
-    console.log(`id:`, id);
     db.query(`SELECT * FROM questions JOIN quizzes on questions.quiz_id = quizzes.id WHERE questions.quiz_id = $1;`, [id])
     .then(data => {
       const quiz = data.rows;
-      console.log("Quiz:", quiz);
       return res.json({quiz});
     }).catch(err => {
       console.log(err);
