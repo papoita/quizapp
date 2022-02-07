@@ -1,3 +1,14 @@
+
+// {
+//   question: 'Whatever is the questions',
+//     options: ['answer 1', 'answer 2', 'answer 3', 'answer 4'],
+//       //index of the correct answer
+//       answer: 2
+// }
+
+//how does the request body will look like
+// transform the data into what I need in backend
+
 // $(document).ready(function() {
 
 //   let userAnswers = req.body.answers;
