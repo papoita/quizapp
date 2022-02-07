@@ -1,49 +1,49 @@
-.quiz-container {
+.quizzes-container {
   display: flex;
   flex-flow: column;
-  margin-top: 5em;
+  margin-top: 2rem;
 }
 
 .quiz {
   display: flex;
   width: 150%;
-  height: 7rem;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   font-size: 1.3rem;
   background-color: rgb(233, 230, 230);
-  margin-bottom: 20%;
+  margin-bottom: 10%;
   margin-left: -20%;
-  border: button {
-    display: flex;
-    flex-direction: column;
-    border: none;
-    background-color: transparent;
-    font-size: 3rem;
-    cursor: pointer;
+}
+
+.quiz-info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5%;
+  margin-top: 1%;
+}
+
+.quiz-attempt {
+  display: flex;
+  flex-direction: column;
+  margin-right: 5%;
+  margin-top: 1%;
+  margin-bottom: 1.5%;
+  cursor: pointer;
+
+  a {
+    color: inherit;
+    text-decoration: unset;
   }
 
-  button i {
+  i {
     margin-bottom: 0.5rem;
     margin-left: 2rem;
   }
 
-  button span {
-    font-size: 1.3rem;
+  #play-icon {
+    font-size: 3rem;
+    margin-top: 1rem;
+    border-top: 1rem;
   }
-}
-
-.quiz-left {
-  display: flex;
-  flex-direction: column;
-  margin-left: 5%;
-  place-self: flex-start;
-  white-space: pre-line;
-}
-
-.quiz-right {
-  display: flex;
-  flex-direction: column;
-  margin-right: 5%;
 }
