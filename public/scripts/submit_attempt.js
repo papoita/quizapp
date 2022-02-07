@@ -1,9 +1,11 @@
-const shuffleAnswers = function () {
+const shuffleAnswers = function ()
+{
   let answersArr = ['answer_1', 'answer_2', 'answer_3', 'answer_correct'];
   return answersArr.sort((a, b) => 0.5 - Math.random());
 };
 
-const appendQuestion = function(quiz, i) {
+const appendQuestion = function (quiz, i)
+{
   const answersOrder = shuffleAnswers();
   return $(`<article class="question-box">
     <header><h5 class="show-quiz-question">${quiz.question}</h5></header>
@@ -24,12 +26,15 @@ const appendQuestion = function(quiz, i) {
   </article>`);
 };
 
-$(document).ready(function() {
+$(document).ready(function ()
+{
   const id = window.location.href.slice(34);
-    $.get(`/api/questions/${id}`).then(data => {
-      for (let x = 0; x < data.quiz.length; x++) {
-        $(".quiz-container").append(appendQuestion(data.quiz[x], x));
-      };
+  $.get(`/api/questions/${id}`).then(data =>
+  {
+    for (let x = 0; x < data.quiz.length; x++)
+    {
+      $(".quiz-container").append(appendQuestion(data.quiz[x], x));
+    };
   })
 });
 

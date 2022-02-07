@@ -6,12 +6,15 @@ module.exports = (db) =>
   //CREATE
   router.post("/", (req, res) =>
   {
-    const user_id = 1;
-    const quiz_id = req.body.id;
-    const answers = req.body.answers;
-    const date = new Date().toJSON().slice(0,10);
+    res.send("hello post");
+    console.log(req.body);
+    // const user_id = 1;
+    // const quiz_id = req.body.id;
+    // console.log(req.body.id);
+    // const answers = req.body.answers;
+    // const date = new Date().toJSON().slice(0, 10);
 
-    testfunction(req.body); // .then(do something)
+    // testfunction(req.body); // .then(do something)
     // const quiz_id = db.query(`SELECT * FROM quizzes WHERE user_id = $1;`, [user_id])
     // const quiz_id = db.query(`SELECT * FROM questions JOIN quizzes on questions.quiz_id = quizzes.id WHERE questions.quiz_id = $1;`, [x])
     // .then(data => {
@@ -40,8 +43,8 @@ module.exports = (db) =>
 
     //   return res.render("test_page", templateVars);
 
-      //return res.status(201).send({ message: "Attempt Created!", question })
-      //return res.redirect("/api/attempts/:id")
+    //return res.status(201).send({ message: "Attempt Created!", question })
+    //return res.redirect("/api/attempts/:id")
     // });
   });
 
@@ -59,9 +62,18 @@ module.exports = (db) =>
   //one api/attempts/:id
   router.get("/:id", (req, res) =>
   {
-    const user_id = 1;
-    const attempt = db.query(`SELECT score, COUNT(questions.id) FROM quiz_attempts JOIN questions ON quiz_attempts.quiz_id = questions.quiz_id WHERE id = $1 GROUP BY score;`, [req.params.id]).then(data => data.rows[0]);
-    return res.status(201).send({ message: "attempt found", attempt })
+    // console.log("hello ");
+    // const user_id = 1;
+    // const attempt = db.query(`SELECT score, COUNT(questions.id) FROM quiz_attempts JOIN questions ON quiz_attempts.quiz_id = questions.quiz_id WHERE id = $1 GROUP BY score;`, [req.params.id]).then(data => data.rows[0]);
+    // return res.status(201).send({ message: "attempt found", attempt })
+
+
+    const attempt = db.query(`SELECT * FROM quiz_attempts;`).then(data => res.status(201).send(data.rows));
+
+    // return res.status(201).send({ message: "attempt found", attempt })
+
+    // const attempt = db.query(`SELECT score, COUNT(quiz.id) FROM quiz_attempts JOIN questions ON quiz_attempts.quiz_id = questions.quiz_id WHERE quiz_attempts.id = $1 GROUP BY score;`, [req.params.id]).then(data => data.rows[0]);
+    // return res.status(201).send({ message: "attempt found", attempt })
   });
 
   //UPDATE
