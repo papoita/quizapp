@@ -1,9 +1,3 @@
-@mixin nav-button {
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-}
-
 nav {
   display: flex;
   align-items: center;
@@ -15,25 +9,26 @@ nav {
   font-size: 1.2rem;
   background-image: url("https://www.transparenttextures.com/patterns/cloth-alike.png");
 
-  button {
-    @include nav-button();
+  a {
+    color: black;
+    text-decoration: unset;
   }
 }
 
-.logo button {
-  margin-left: 5%;
-  margin-right: 5%;
+.logo {
+  margin-left: 0.7%;
+  margin-right: 2.5%;
   font-size: 1.5rem;
   font-family: "Montserrat";
 }
 
-.nav-buttons {
+.nav-links {
   display: flex;
-  margin-left: 1.5%;
+  width: 45rem;
+}
 
-  .create-quiz {
-    margin-right: 1rem;
-  }
+.create-quiz {
+  margin-right: 5%;
 }
 
 .authentication {

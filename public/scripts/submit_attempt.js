@@ -1,3 +1,52 @@
+<<<<<<< HEAD
+=======
+const shuffleAnswers = function () {
+  let answersArr = ['answer_1', 'answer_2', 'answer_3', 'answer_correct'];
+  return answersArr.sort((a, b) => 0.5 - Math.random());
+};
+
+const appendQuestion = function(quiz, i) {
+  const answersOrder = shuffleAnswers();
+  return $(`<article class="question-box">
+    <header><h5 class="show-quiz-question">${quiz.question}</h5></header>
+    <div class="show-quiz-alternatives">
+      <label for="question${i}-alternative-1">
+        <input type="radio" class="question${i}-alternative-1" name="question${i}-alternative" required>${quiz[answersOrder[0]]}</input>
+      </label>
+      <label for="question${i}-alternative-2">
+        <input type="radio" class="question${i}-alternative-2" name="question${i}-alternative">${quiz[answersOrder[1]]}</input>
+      </label>
+      <label for="question${i}-alternative-3">
+        <input type="radio" class="question${i}-alternative-3" name="question${i}-alternative">${quiz[answersOrder[2]]}</input>
+      </label>
+      <label for="question${i}-alternative-4">
+        <input type="radio" class="question${i}-alternative-4" name="question${i}-alternative">${quiz[answersOrder[3]]}</input>
+      </label>
+    </div>
+  </article>`);
+};
+
+$(document).ready(function() {
+  const id = window.location.href.slice(34);
+    $.get(`/api/questions/${id}`).then(data => {
+      for (let x = 0; x < data.quiz.length; x++) {
+        $(".quiz-container").append(appendQuestion(data.quiz[x], x));
+      };
+  })
+});
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> feature/attempt-quiz
 // $(document).ready(function() {
 
 //   let userAnswers = req.body.answers;

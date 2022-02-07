@@ -95,7 +95,6 @@ module.exports = (db) =>
 
       const quiz = data.rows;
       const templateVars = { quiz };
-      console.log(quiz);
 
       return res.render("quiz_attempt", templateVars);
       // return res.redirect("/");
