@@ -8,7 +8,7 @@ const express = require("express");
 const morgan = require("morgan");
 const cookieSession = require('cookie-session')
 const { Pool } = require("pg");
-const bodyParser = require('body-parser');
+//const bodyParser = require('body-parser');
 
 //local helper files
 const sassMiddleware = require("./lib/sass-middleware");
@@ -53,8 +53,8 @@ app.use(
 );
 app.use(express.static("public"));
 app.set("view engine", "ejs");
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
 
 //ROUTES ENDPOINTS
 app.use("/api/users", usersRoutes(db));
