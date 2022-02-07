@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 const shuffleAnswers = function () {
   let answersArr = ['answer_1', 'answer_2', 'answer_3', 'answer_correct'];
   return answersArr.sort((a, b) => 0.5 - Math.random());
@@ -46,7 +44,6 @@ $(document).ready(function() {
 
 
 
->>>>>>> feature/attempt-quiz
 // $(document).ready(function() {
 
 //   let userAnswers = req.body.answers;
