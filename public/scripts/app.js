@@ -3,11 +3,11 @@
 const addQuestion = function(questionNumber) {
   return $(`<article id="q${questionNumber}" class="question-box">
   <div>Question</div>
-  <input type="text" class="question-input" name="question" placeholder="Enter question">
-  <input type="text" class="answer-input" name="correct_answer" placeholder="Correct answer">
-  <input type="text" class="answer-input" name="wrong_answer1" placeholder="Wrong answer">
-  <input type="text" class="answer-input" name="wrong_answer2" placeholder="Wrong answer">
-  <input type="text" class="answer-input" name="wrong_answer3" placeholder="Wrong answer">
+  <input type="text" class="question-input" name="question" placeholder="Enter question" required>
+  <input type="text" class="answer-input" name="correct_answer" placeholder="Correct answer" required>
+  <input type="text" class="answer-input" name="wrong_answer1" placeholder="Wrong answer" required>
+  <input type="text" class="answer-input" name="wrong_answer2" placeholder="Wrong answer" required>
+  <input type="text" class="answer-input" name="wrong_answer3" placeholder="Wrong answer" required>
   <button class="remove-question-bttn" data-question="${questionNumber}" type="button" name="remove-question">- Remove Question</button>
   </article>`)
 };

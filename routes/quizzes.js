@@ -41,11 +41,10 @@ module.exports = (db) =>
    db.query(`INSERT INTO quizzes (quiz_name, user_id, date, public) VALUES($1, $2, $3, $4) RETURNING *;`, [req.body.quiz_name, user_id, date, public])
     .then(data => {
       const id = data.rows[0].id;
-      console.log(req.body);
       addQuestionsToDb(req.body,id)
+      const templateVars = { quiz_id: id };
 
-      return res.status(201).send("Quiz Created!");
-
+      return res.redirect(`/quiz_new/${id}`);
     })
   });
 

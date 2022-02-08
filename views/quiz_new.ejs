@@ -17,7 +17,8 @@
   <!-- App CSS -->
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/quiz_new.css" type="text/css" />
 
   <!-- App JS -->
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
@@ -32,30 +33,19 @@
 
     <!-- Page-specific (main) content here -->
 
-    <main>
-      <form method="post" action="">
-        <section id="create-quiz-header">
-          <span id="page-title">Create a new quiz</span>
-
-          <input type="text" name="quiz-title" placeholder="Enter your quiz title">
-          <label class="switch">
-            <input type="checkbox">
-            <span class="slider round">Public quiz</span>
-          </label>
-        </section>
-        <section id="question-box">
-          <input type="text" name="question" placeholder="Enter a question">
-          <input type="text" name="correct-answer" placeholder="Correct answer">
-          <input type="text" name="wrong-answer1" placeholder="Wrong answer">
-          <input type="text" name="wrong-answer2" placeholder="Wrong answer">
-          <input type="text" name="wrong-answer3" placeholder="Wrong answer">
-        </section>
-        <section id="quiz-buttons">
-          <button name="add question">+ Add Question</button>
-          <button name="create-quiz">Create quiz</button>
-        </section>
-      </form>
-    </main>
+    <main class="quiz-new">
+      <header>
+        <h1 class="quiz-new-name"><%= quiz_name %> successfully created!</h1>
+      <i class="fas fa-check-circle"></i>
+    </header>
+    <section class="share-quiz">
+      <div>
+        <p>Share your quiz with your friends with the following link:</p>
+        <a href="/api/quizzes/<%= id %>">quizapp.com/quizzes/<%= id %></a>
+      </div>
+      <i class="fas fa-share"></i>
+    </section>
+  </main>
 </body>
 
 </html>

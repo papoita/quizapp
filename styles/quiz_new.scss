@@ -1,0 +1,52 @@
+.quiz-new {
+  width: 80%;
+
+  header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 2rem;
+  }
+
+  section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 10rem;
+    font-size: 2rem;
+    width: 126%;
+    margin-left: -13%;
+    padding-top: 1%;
+    padding-bottom: 4%;
+  }
+}
+
+.quiz-new-name {
+  font-weight: normal;
+  margin-right: 2rem;
+}
+
+.quiz-new header i {
+  font-size: 5rem;
+  color: rgb(91, 211, 121);
+}
+
+.share-quiz {
+  background-color: rgb(91, 211, 121);
+  background-image: url("https://www.transparenttextures.com/patterns/cloth-alike.png");
+  width: 100%;
+
+  div {
+    margin-left: 12%;
+    margin-right: 7%;
+  }
+
+  i {
+    font-size: 7rem;
+  }
+
+  a {
+    text-decoration: unset;
+    color: black;
+  }
+}
