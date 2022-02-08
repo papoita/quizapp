@@ -9,12 +9,44 @@ module.exports = (db) =>
     // const { user_id } = req.session;
     const user_id = 1;
     const quiz_id = req.body.quiz_id;
-    console.log(req.body);
+    const userAnswers = [];
+    const quizAnswers = [];
+    const date = new Date().toJSON().slice(0,10);
+    let score = 0;
+
+    //Helper Functions
+    const gettingUserAnswers = (object) => {
+      for (let obj in object) {
+        userAnswers.push(object[obj]);
+      }
+      userAnswers.shift();
+      return userAnswers;
+    };
+
+    const gettingQuizAnswers = (array) => {
+      for (let obj of array) {
+        quizAnswers.push(obj["answer_correct"]);
+      }
+      return quizAnswers;
+    };
+
+    const comparingAnswers = (array, array2) => {
+      for (let i = 0; i < array.length; i++) {
+        if (array[i] === array2[i]){
+          score++;
+        }
+      }
+
+      return db.query(`INSERT INTO quiz_attempts (quiz_id, user_id, score, date) VALUES ($1,$2,$3,$4);`, [quiz_id, user_id, score, date]);
+    };
+
 
     db.query(`SELECT answer_correct FROM questions WHERE quiz_id = $1;`, [quiz_id])
     .then(data => {
-      const correct_answers = data.rows;
-      return res.send(correct_answers);
+
+      comparingAnswers(gettingUserAnswers(req.body), gettingQuizAnswers(data.rows));
+
+      return res.send(`Congratulations! Your score is: ${score}/${userAnswers.length}`);
     }).catch(err => {
       console.log("Error occured in attempts.js!:", err);
     });
