@@ -31,7 +31,9 @@ module.exports = (db) =>
   //GET HOME ENDPOINT
   router.get("/", (req, res) =>
   {
-    db.query(`SELECT quizzes.*, users.* FROM quizzes JOIN users ON users.id = quizzes.user_id WHERE public = true;`)
+    db.query(`SELECT quizzes.*, users.username FROM quizzes JOIN users ON users.id = quizzes.user_id
+    WHERE public = true
+    ORDER BY id;`)
       .then(data =>
       {
         const quizzes = data.rows;
@@ -74,6 +76,28 @@ module.exports = (db) =>
   router.get("/quizzes/create", (req, res) =>
   {
     return res.render("quiz_create");
+  });
+
+  // New quiz created
+  router.get("/quiz_new/:id/", (req, res) =>
+  {
+    const quiz_id = Number(req.params.id);
+    db.query('SELECT * FROM quizzes WHERE id = $1', [quiz_id])
+    .then(data => {
+      const quiz = data.rows[0];
+      if (!quiz.id) {
+        return res
+        .status(500)
+        .send({ error: "Quiz not found" })
+      }
+      const templateVars = quiz;
+      return res.render("quiz_new", templateVars);
+    }).catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message })
+    })
+
   });
 
   //see only one quiz or show newly created quiz

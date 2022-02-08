@@ -39,24 +39,17 @@
 
           <article class="quiz">
             <div class="quiz-info">
-              <p>
-                <%= quiz.quiz_name %>
-              </p>
-              <p>created by <%= quiz.username %>
-              </p>
+              <p><%= quiz.quiz_name %></p>
+              <p>created by <%= quiz.username %></p>
             </div>
             <div class="quiz-attempt">
-              <a href="/api/quizzes/<%= quiz.id %>">
-                <i id="play-icon" class="fas fa-play-circle"></i>
+              <a href='/api/quizzes/<%= quiz.id %>'>
+                <i class="fas fa-play-circle"></i>
                 <p>Attempt quiz</p>
               </a>
             </div>
           </article>
-
           <% }); %>
-
-
-
       </section>
     </main>
 </body>
