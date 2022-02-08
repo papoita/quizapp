@@ -6,8 +6,19 @@ module.exports = (db) =>
   //CREATE
   router.post("/", (req, res) =>
   {
-    res.send("hello post");
+    // const { user_id } = req.session;
+    const user_id = 1;
+    const quiz_id = req.body.quiz_id;
     console.log(req.body);
+
+    db.query(`SELECT answer_correct FROM questions WHERE quiz_id = $1;`, [quiz_id])
+    .then(data => {
+      const correct_answers = data.rows;
+      return res.send(correct_answers);
+    }).catch(err => {
+      console.log("Error occured in attempts.js!:", err);
+    });
+
     // const user_id = 1;
     // const quiz_id = req.body.id;
     // console.log(req.body.id);
