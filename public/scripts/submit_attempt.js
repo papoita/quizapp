@@ -11,16 +11,16 @@ const appendQuestion = function (quiz, i)
     <header><h5 class="show-quiz-question">${quiz.question}</h5></header>
     <div class="show-quiz-alternatives">
       <label for="question${i}-alternative-1">
-        <input type="radio" class="question${i}-alternative-1" name="question${i}-alternative" required>${quiz[answersOrder[0]]}</input>
+        <input type="radio" class="question${i}-alternative-1" name="question${i}-alternative" value="${quiz[answersOrder[0]]}"required>${quiz[answersOrder[0]]}</input>
       </label>
       <label for="question${i}-alternative-2">
-        <input type="radio" class="question${i}-alternative-2" name="question${i}-alternative">${quiz[answersOrder[1]]}</input>
+        <input type="radio" class="question${i}-alternative-2" name="question${i}-alternative" value="${quiz[answersOrder[1]]}">${quiz[answersOrder[1]]}</input>
       </label>
       <label for="question${i}-alternative-3">
-        <input type="radio" class="question${i}-alternative-3" name="question${i}-alternative">${quiz[answersOrder[2]]}</input>
+        <input type="radio" class="question${i}-alternative-3" name="question${i}-alternative" value="${quiz[answersOrder[2]]}">${quiz[answersOrder[2]]}</input>
       </label>
       <label for="question${i}-alternative-4">
-        <input type="radio" class="question${i}-alternative-4" name="question${i}-alternative">${quiz[answersOrder[3]]}</input>
+        <input type="radio" class="question${i}-alternative-4" name="question${i}-alternative" value="${quiz[answersOrder[3]]}">${quiz[answersOrder[3]]}</input>
       </label>
     </div>
   </article>`);
