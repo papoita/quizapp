@@ -207,6 +207,10 @@ module.exports = (db) =>
     res.send("Page not found");
   });
 
+  //share attempt.js (https://github.com/papoita/quizapp/blob/master/docs/wireframes/share_attempt.pdf)
+
+  // info we'll need for this page
+  // username & quiz_name & quiz_id & quiz_attempt.score & COUNT(id) questions WHERE quiz_id = quiz_id
 
 
   return router;

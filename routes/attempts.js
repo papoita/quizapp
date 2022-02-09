@@ -44,56 +44,16 @@ module.exports = (db) =>
     db.query(`SELECT answer_correct FROM questions WHERE quiz_id = $1;`, [quiz_id])
     .then(data => {
 
-      comparingAnswers(gettingUserAnswers(req.body), gettingQuizAnswers(data.rows));
+      comparingAnswers(gettingUserAnswers(req.body), gettingQuizAnswers(data.rows))
+      .then(results => {
 
-    }).then(data => {
+        return res.redirect(`/results/${results.rows[0].id}`);
 
-      console.log(data);
-
-      return res.send(`Congratulations! Your score is: ${score}/${userAnswers.length}`);
-
+      });
     }).catch(err => {
       console.log("Error occured in attempts.js!:", err);
     });
 
-    // const user_id = 1;
-    // const quiz_id = req.body.id;
-    // console.log(req.body.id);
-    // const answers = req.body.answers;
-    // const date = new Date().toJSON().slice(0, 10);
-
-    // testfunction(req.body); // .then(do something)
-    // const quiz_id = db.query(`SELECT * FROM quizzes WHERE user_id = $1;`, [user_id])
-    // const quiz_id = db.query(`SELECT * FROM questions JOIN quizzes on questions.quiz_id = quizzes.id WHERE questions.quiz_id = $1;`, [x])
-    // .then(data => {
-    //   data.rows[0].id});
-
-    // const { question, answer_1, answer_2, answer_3, answer_correct } = req.body;
-
-
-
-    // db.query(`SELECT * FROM questions JOIN quizzes on questions.quiz_id = quizzes.id WHERE questions.quiz_id = $1;`, [req.params.id])
-    // .then(data => {
-
-    //   const quiz = data.rows;
-    //   const templateVars = { quiz: quiz };
-    //   console.log(quiz);
-
-    //   return res.render("quiz_attempt", templateVars);
-    //   // return res.redirect("/");
-    //   // return res.status(201).send({ quiz });
-    // })
-
-    // db.query(`INSERT INTO quiz_attempts (quiz_id, user_id, score, date) VALUES($1, $2, $3, $4) RETURNING *;`, [quiz_id, user_id, score, date])
-    // .then(data => {
-    //   const attempt = data.rows[0];
-    //   templateVars = { attempt: attempt };
-
-    //   return res.render("test_page", templateVars);
-
-    //return res.status(201).send({ message: "Attempt Created!", question })
-    //return res.redirect("/api/attempts/:id")
-    // });
   });
 
 
