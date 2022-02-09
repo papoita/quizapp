@@ -16,33 +16,36 @@
 
   <!-- App CSS -->
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
   <link rel="stylesheet" href="/styles/header.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/quiz_attempt.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/quiz_results.css" type="text/css" />
 
   <!-- App JS -->
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
-  <script type="text/javascript" src="/scripts/submit_attempt.js"></script>
 </head>
 
 <body>
 
+  <!-- Top nav bar (fixed) -->
+
   <%- include('partials/_header'); %>
 
-    <!-- Top nav bar (fixed) -->
-
     <!-- Page-specific (main) content here -->
-  <main class="show-quiz">
-    <form method="post" action="/api/attempts">
-      <h4 class="show-quiz-title"><%= quiz[0].quiz_name %></h4>
-      <input type="number" name= "quiz_id" value=<%= quiz[0].id %> hidden></input
-      <!-- Quiz Container -->
-      <section class="quiz-container">
-      </section>
-      <footer>
-        <button class="submit-quiz-btn" type="submit">Submit</button>
-      </footer>
-    </form>
+
+    <main class="quiz-results">
+      <header>
+        <h1 class="quiz-results-name"><%= quiz_name %> results</h1>
+      </header>
+      <section class="result-info">
+        <h2 class="score">Final Score: <%= score %>/<%= number_of_questions %></h2>
+        <a class="try-again-link" type="button" href="/api/quizzes/<%= quiz_id %>">Try Quiz Again</a>
+      <div class="share-results">
+        <p>Share your quiz results with your friends with the following link:</p>
+        <a href="/api/results/<%= id %>">quizapp.com/attempts/<%= id %></a>
+      </div>
+    </section>
   </main>
 </body>
+
 </html>

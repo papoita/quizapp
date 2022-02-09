@@ -97,6 +97,32 @@ module.exports = (db) =>
         .status(500)
         .json({ error: err.message })
     })
+  })
+
+  // Quiz results
+  router.get("/results/:id/", (req, res) =>
+  {
+    const attempt_id = Number(req.params.id);
+    db.query(`SELECT quiz_attempts.*, quizzes.quiz_name, COUNT(questions.*) AS number_of_questions
+    FROM quiz_attempts
+    JOIN quizzes ON quiz_attempts.quiz_id = quizzes.id
+    JOIN questions ON questions.quiz_id = quizzes.id
+    WHERE quiz_attempts.id = $1
+    GROUP BY quiz_attempts.id, quizzes.quiz_name`, [attempt_id])
+    .then(data => {
+      const attempt = data.rows[0];
+      if (!attempt.id) {
+        return res
+        .status(500)
+        .send({ error: "Results not found" })
+      }
+      const templateVars = attempt;
+      return res.render("quiz_results", templateVars);
+    }).catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message })
+    })
 
   });
 
@@ -185,4 +211,3 @@ module.exports = (db) =>
 
   return router;
 };
-

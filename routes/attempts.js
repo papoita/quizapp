@@ -37,7 +37,7 @@ module.exports = (db) =>
         }
       }
 
-      return db.query(`INSERT INTO quiz_attempts (quiz_id, user_id, score, date) VALUES ($1,$2,$3,$4);`, [quiz_id, user_id, score, date]);
+      return db.query(`INSERT INTO quiz_attempts (quiz_id, user_id, score, date) VALUES ($1,$2,$3,$4) RETURNING *;`, [quiz_id, user_id, score, date]);
     };
 
 
@@ -46,7 +46,12 @@ module.exports = (db) =>
 
       comparingAnswers(gettingUserAnswers(req.body), gettingQuizAnswers(data.rows));
 
+    }).then(data => {
+
+      console.log(data);
+
       return res.send(`Congratulations! Your score is: ${score}/${userAnswers.length}`);
+
     }).catch(err => {
       console.log("Error occured in attempts.js!:", err);
     });
