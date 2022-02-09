@@ -1,7 +1,7 @@
 {
   "name": "node-skeleton",
   "version": "1.0.0",
-  "description": "",
+  "description": "A Quiz App web application created for educational purposes",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,7 +10,7 @@
     "db:reset": "node bin/resetdb.js",
     "sass": "sass styles:public/styles --watch --poll --no-source-map"
   },
-  "author": "Lighthouse Labs",
+  "authors": "Marcos Spomberg, Paola Pérez, Tony Walker",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.1",
