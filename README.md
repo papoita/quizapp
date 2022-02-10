@@ -1,6 +1,36 @@
 LHL Node Skeleton
 =========
 
+## Description
+
+Quiz App is a quiz-creating, quiz-taking, and quiz-sharing web application built for education purposes.
+
+## Screenshots
+
+Quiz App Home Page
+
+!["quiz-app-home-page"](docs/images/home_page.png)
+
+Creating a New Quiz
+
+!["creating-a-new-quiz-page"](docs/images/new_quiz.png)
+
+Sharing a Created Quiz
+
+!["sharing-a-quiz-page"](docs/images/share_quiz.png)
+
+Attempting a Quiz
+
+!["attempting-a-quiz-page"](docs/images/quiz_attempt.png)
+
+Quiz Results
+
+!["quiz-results-page"](docs/images/quiz_results.png)
+
+Private & Public Quizzes
+
+!["unlisted-quiz-page"](docs/images/unlisted_quizzes.png)
+
 ## Project Setup
 
 The following steps are only for _one_ of the group members to perform.
