@@ -15,9 +15,11 @@
     rel="stylesheet">
 
   <!-- App CSS -->
-  <link rel="stylesheet" href="/styles/index.css" type="text/css" />
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
   <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/quiz_new.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/share_attempt.css" type="text/css" />
 
   <!-- App JS -->
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
@@ -26,34 +28,32 @@
 
 <body>
 
+  <!-- Top nav bar (fixed) -->
+
   <%- include('partials/_header'); %>
 
-    <!-- Top nav bar (fixed) -->
+
 
     <!-- Page-specific (main) content here -->
-    <main>
-      <!-- Quiz container -->
-      <section class="quizzes-container">
-        <% quizzes.forEach(quiz=> { %>
+    <main class="quiz-new">
+      <header>
+        <h1 class="quiz-new-name">
+          <%= username %>'s result for <%= quiz_name %>
+        </h1>
 
-          <article class="quiz">
-            <div class="quiz-info">
-              <p>
-                <%= quiz.quiz_name %>
-              </p>
-              <p>created by <%= quiz.username %>
-              </p>
-            </div>
-            <div class="quiz-attempt">
-              <a href='/api/quizzes/<%= quiz.id %>'>
-                <i class="fas fa-play-circle"></i>
-                <p>Attempt quiz</p>
-              </a>
-            </div>
-          </article>
-          <% }); %>
+      </header>
+      <section class="share-quiz">
+        <div>
+          <p> <b>
+              <%= username %> scored <%= score %> out of 5 questions in this quiz
+            </b>
+          </p>
+
+          <a href="/api/quizzes/<%= quiz_id %>">Attempt this quiz</a>
+          <a href="/quizzes/create">Create you own quiz</a>
+
+        </div>
+
       </section>
     </main>
 </body>
-
-</html>

@@ -83,20 +83,23 @@ module.exports = (db) =>
   {
     const quiz_id = Number(req.params.id);
     db.query('SELECT * FROM quizzes WHERE id = $1', [quiz_id])
-    .then(data => {
-      const quiz = data.rows[0];
-      if (!quiz.id) {
-        return res
-        .status(500)
-        .send({ error: "Quiz not found" })
-      }
-      const templateVars = quiz;
-      return res.render("quiz_new", templateVars);
-    }).catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message })
-    })
+      .then(data =>
+      {
+        const quiz = data.rows[0];
+        if (!quiz.id)
+        {
+          return res
+            .status(500)
+            .send({ error: "Quiz not found" })
+        }
+        const templateVars = quiz;
+        return res.render("quiz_new", templateVars);
+      }).catch(err =>
+      {
+        res
+          .status(500)
+          .json({ error: err.message })
+      })
   })
 
   // Quiz results
@@ -109,21 +112,56 @@ module.exports = (db) =>
     JOIN questions ON questions.quiz_id = quizzes.id
     WHERE quiz_attempts.id = $1
     GROUP BY quiz_attempts.id, quizzes.quiz_name`, [attempt_id])
-    .then(data => {
-      const attempt = data.rows[0];
-      if (!attempt.id) {
-        return res
-        .status(500)
-        .send({ error: "Results not found" })
-      }
-      const templateVars = attempt;
-      return res.render("quiz_results", templateVars);
-    }).catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message })
-    })
+      .then(data =>
+      {
+        const attempt = data.rows[0];
+        if (!attempt.id)
+        {
+          return res
+            .status(500)
+            .send({ error: "Results not found" })
+        }
+        const templateVars = attempt;
+        return res.render("quiz_results", templateVars);
+      }).catch(err =>
+      {
+        res
+          .status(500)
+          .json({ error: err.message })
+      })
 
+  });
+
+  router.get("/quizzes/:id", (req, res) =>
+  {
+    // const { user_id } = req.session;
+    const user_id = 1;
+
+    if (!user_id)
+    {
+      return res.status(400).send({ message: "User is not logged in" })
+    }
+
+    const validUser = db.query(`SELECT * FROM users WHERE id = $1;`, [user_id]).then(data => data.rows[0]);
+    if (!validUser)
+    {
+      return res.status(400).send({ message: "User session is not valid" })
+    }
+
+    // const quiz_id = db.query(`SELECT * FROM questions JOIN quizzes on questions.quiz_id = quizzes.id WHERE questions.quiz_id = $1;`, [quiz_id])
+    // .then(data => data.rows[0]);
+
+    db.query(`SELECT * FROM questions JOIN quizzes on questions.quiz_id = quizzes.id WHERE questions.quiz_id = $1;`, [req.params.id])
+      .then(data =>
+      {
+
+        const quiz = data.rows;
+        const templateVars = { quiz };
+
+        return res.render("quiz_attempt", templateVars);
+        // return res.redirect("/");
+        // return res.status(201).send({ quiz });
+      })
   });
 
   //see only one quiz or show newly created quiz
@@ -188,18 +226,100 @@ module.exports = (db) =>
   //   res.render("show_attempt")
   // });
 
-  router.get("/share_quiz", (req, res) =>
+  //SHARE QUIZ ATTEMPT
+
+  //TEST
+  // share quiz attempt
+  router.get("/share_attempt/:id/", (req, res) =>
   {
-    //share the link to api/quizzes/:id
-    // we need the user_id, score, and number of quiz questions
-    res.render("test_page"); //placeholder
+
+    const attempt_id = Number(req.params.id);
+
+    db.query(`SELECT * FROM quiz_attempts JOIN users ON quiz_attempts.user_id = users.id JOIN quizzes ON quiz_attempts.quiz_id = quizzes.id WHERE quiz_attempts.id = $1;`, [attempt_id]).then(data =>
+    {
+      const attempt = data.rows[0];
+      if (!attempt)
+      {
+        return res
+          .status(500)
+          .send({ error: "Attempt not found" })
+      }
+
+      const { username, quiz_name, score, quiz_id } = attempt;
+
+      //const numQuestions = db.query(`SELECT COUNT(id) FROM questions WHERE quiz_id = $1;`, [quiz_id]).then(data => data.rows[0].count);
+      //console.log(numQuestions);
+
+      const templateVars = {
+        username, quiz_name, score, quiz_id
+      };
+
+      return res.render("share_attempt", templateVars);
+    }
+
+
+    );
+
+    // status(201).send(data.rows));
+
+    // const quiz_id = Number(req.params.id);
+    // db.query('SELECT * FROM quizzes WHERE id = $1', [quiz_id])
+    //   .then(data =>
+    //   {
+    //     const quiz = data.rows[0];
+    //     if (!quiz.id)
+    //     {
+    //       return res
+    //         .status(500)
+    //         .send({ error: "Quiz not found" })
+    //     }
+    //     const templateVars = quiz;
+    //     return res.render("share_attempt", templateVars);
+    //   }).catch(err =>
+    //   {
+    //     res
+    //       .status(500)
+    //       .json({ error: err.message })
+    //   })
+
   });
 
-  router.get("/share_results", (req, res) =>
-  {
-    //share the link to api/attempts/:id
-    res.render("test_page"); //placeholder
-  });
+  // router.get("/share_attempt/:id/", (req, res) =>
+  // {
+  //   const attempts_id = Number(req.params.id);
+  //   db.query('SELECT * FROM quiz_attempts WHERE id = $1', [attempts_id])
+  //     .then(data =>
+  //     {
+  //       const attempt = data.rows[0];
+  //       if (!attempt.id)
+  //       {
+  //         return res
+  //           .status(500)
+  //           .send({ error: "Attempt not found" })
+  //       }
+  //       const templateVars = attempt;
+  //       return res.render("share_attempt", templateVars);
+  //     }).catch(err =>
+  //     {
+  //       res
+  //         .status(500)
+  //         .json({ error: err.message })
+  //     })
+
+  // });
+
+  // router.get("/share_quiz", (req, res) =>
+  // {
+  //   //share the link to api/quizzes/:id
+  //   // we need the user_id, score, and number of quiz questions
+  //   res.render("quiz_new"); //placeholder
+  // });
+
+  // router.get("/share_results", (req, res) =>
+  // {
+  //   //share the link to api/attempts/:id
+  //   res.render("share_attempt"); //placeholder
+  // });
 
   router.get("*", (req, res) =>
   {
