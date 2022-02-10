@@ -71,3 +71,11 @@ The following steps are only for _one_ of the group members to perform.
 - Node 10.x or above
 - NPM 5.x or above
 - PG 6.x
+- body-parser ^1.19.1
+- chalk ^2.4.2,
+- cookie-session ^2.0.0,
+- dotenv ^2.0.0,
+- ejs ^2.6.2,
+- express ^4.17.1,
+- morgan ^1.9.1,
+- sass   1.35.1
