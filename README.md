@@ -11,6 +11,10 @@ Quiz App Home Page
 
 !["quiz-app-home-page"](docs/images/home_page.png)
 
+Private & Public Quizzes
+
+!["unlisted-quiz-page"](docs/images/unlisted_quizzes.png)
+
 Creating a New Quiz
 
 !["creating-a-new-quiz-page"](docs/images/new_quiz.png)
@@ -27,9 +31,9 @@ Quiz Results
 
 !["quiz-results-page"](docs/images/quiz_results.png)
 
-Private & Public Quizzes
+Quiz Result Sharing
 
-!["unlisted-quiz-page"](docs/images/unlisted_quizzes.png)
+!["quiz-result-share"](docs/images/quiz_share.png)
 
 ## Project Setup
 
@@ -79,3 +83,7 @@ The following steps are only for _one_ of the group members to perform.
 - express ^4.17.1,
 - morgan ^1.9.1,
 - sass   1.35.1
+
+## Credits
+
+An amazing online ressource for generating quiz data, which we made use of in this project, can be found at [https://opentdb.com/api_config.php](https://opentdb.com/api_config.php).
