@@ -31,11 +31,19 @@ module.exports = (db) =>
 
     // Helper Function
     const addQuestionsToDb = (object, id) => {
-    for(let i = 0; i < object.question.length; i++) {
+
+    if (!Array.isArray(object.question)) {
       db.query(`INSERT INTO questions (question, answer_1, answer_2, answer_3, answer_correct, quiz_id)
-      VALUES ($1, $2, $3, $4, $5, $6);`, [object.question[i], object.wrong_answer1[i], object.wrong_answer2[i], object.wrong_answer3[i], object.correct_answer[i], id])
+      VALUES ($1, $2, $3, $4, $5, $6);`, [object.question, object.wrong_answer1, object.wrong_answer2, object.wrong_answer3, object.correct_answer, id]);
+      return;
+
+    } else {
+      for(let i = 0; i < object.question.length; i++) {
+        db.query(`INSERT INTO questions (question, answer_1, answer_2, answer_3, answer_correct, quiz_id)
+        VALUES ($1, $2, $3, $4, $5, $6);`, [object.question[i], object.wrong_answer1[i], object.wrong_answer2[i], object.wrong_answer3[i], object.correct_answer[i], id])
+        }
+      return;
       }
-    return;
     };
 
    db.query(`INSERT INTO quizzes (quiz_name, user_id, date, public) VALUES($1, $2, $3, $4) RETURNING *;`, [req.body.quiz_name, user_id, date, public])
@@ -43,7 +51,6 @@ module.exports = (db) =>
       const id = data.rows[0].id;
       addQuestionsToDb(req.body,id)
       const templateVars = { quiz_id: id };
-
       return res.redirect(`/quiz_new/${id}`);
     })
   });
