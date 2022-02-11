@@ -63,7 +63,7 @@ module.exports = (db) =>
         const templateVars = {
           quizzes
         }
-        return res.render("index", templateVars);
+        return res.render("index1", templateVars);
       })
       .catch(err =>
       {
