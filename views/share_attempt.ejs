@@ -37,14 +37,19 @@
     <main class="quiz-new">
       <header>
         <h1 class="quiz-new-name">
-          <%= username %>'s result for <%= quiz_name %>
+          <%= username %>'s result for
+        </h1>
+        <h1>
+          <b>
+            <%= quiz_name %>
+          </b>
         </h1>
 
       </header>
       <section class="share-quiz">
         <div>
           <p> <b>
-              <%= username %> scored <%= score %> out of <%= number_of_questions %> questions in this quiz
+              <%= username %> scored <%= score %> out of <%= number_of_questions %> questions correctly
             </b>
           </p>
 
