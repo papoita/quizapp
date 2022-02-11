@@ -54,7 +54,9 @@ module.exports = (db) =>
   //My quizzes page private requires logged user, this will be the same route as login endpoint because they will have the same look and feel in this case show the list of private quizzes. put login in this route retrieving the user scpecific quizzes
   router.get("/myquizzes", (req, res) =>
   {
-    db.query(`SELECT * FROM quizzes WHERE user_id = 1;`)
+    db.query(`SELECT quizzes.*, users.username FROM quizzes JOIN users ON users.id = quizzes.user_id
+    WHERE users.id = 1
+    ORDER BY id;`)
       .then(data =>
       {
         const quizzes = data.rows;
