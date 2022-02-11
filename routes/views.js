@@ -235,7 +235,8 @@ module.exports = (db) =>
 
     const attempt_id = Number(req.params.id);
 
-    db.query(`SELECT * FROM quiz_attempts JOIN users ON quiz_attempts.user_id = users.id JOIN quizzes ON quiz_attempts.quiz_id = quizzes.id WHERE quiz_attempts.id = $1;`, [attempt_id]).then(data =>
+    db.query(`SELECT quiz_attempts.*, COUNT(questions.id) as number_of_questions, users.username as username, quizzes.quiz_name FROM quiz_attempts JOIN users ON quiz_attempts.user_id = users.id JOIN quizzes ON quiz_attempts.quiz_id = quizzes.id
+    JOIN questions ON questions.quiz_id = quizzes.id WHERE quiz_attempts.id = $1 GROUP BY quiz_attempts.id, users.username, quizzes.quiz_name;`, [attempt_id]).then(data =>
     {
       const attempt = data.rows[0];
       if (!attempt)
@@ -245,13 +246,13 @@ module.exports = (db) =>
           .send({ error: "Attempt not found" })
       }
 
-      const { username, quiz_name, score, quiz_id } = attempt;
+      const { username, quiz_name, score, quiz_id, number_of_questions } = attempt;
 
       //const numQuestions = db.query(`SELECT COUNT(id) FROM questions WHERE quiz_id = $1;`, [quiz_id]).then(data => data.rows[0].count);
       //console.log(numQuestions);
 
       const templateVars = {
-        username, quiz_name, score, quiz_id
+        username, quiz_name, score, quiz_id, number_of_questions
       };
 
       return res.render("share_attempt", templateVars);
