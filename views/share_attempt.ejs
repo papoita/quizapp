@@ -16,8 +16,10 @@
 
   <!-- App CSS -->
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
   <link rel="stylesheet" href="/styles/header.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/quiz_results.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/quiz_new.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/share_attempt.css" type="text/css" />
 
   <!-- App JS -->
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
@@ -30,21 +32,28 @@
 
   <%- include('partials/_header'); %>
 
+
+
     <!-- Page-specific (main) content here -->
-
-    <main class="quiz-results">
+    <main class="quiz-new">
       <header>
-        <h1 class="quiz-results-name"><%= quiz_name %> results</h1>
-      </header>
-      <section class="result-info">
-        <h2 class="score">Final Score: <%= score %>/<%= number_of_questions %></h2>
-        <a class="try-again-link" type="button" href="/api/quizzes/<%= quiz_id %>">Try Quiz Again</a>
-      <div class="share-results">
-        <p>Share your quiz results with your friends with the following link:</p>
-        <a href="/share_attempt/<%= id %>">quizapp.com/attempts/<%= id %></a>
-      </div>
-    </section>
-  </main>
-</body>
+        <h1 class="quiz-new-name">
+          <%= username %>'s result for <%= quiz_name %>
+        </h1>
 
-</html>
+      </header>
+      <section class="share-quiz">
+        <div>
+          <p> <b>
+              <%= username %> scored <%= score %> out of <%= number_of_questions %> questions in this quiz
+            </b>
+          </p>
+
+          <a href="/api/quizzes/<%= quiz_id %>">Attempt this quiz</a>
+          <a href="/quizzes/create">Create you own quiz</a>
+
+        </div>
+
+      </section>
+    </main>
+</body>

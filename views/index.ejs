@@ -38,8 +38,11 @@
 
           <article class="quiz">
             <div class="quiz-info">
-              <p><%= quiz.quiz_name %></p>
-              <p>created by <%= quiz.username %></p>
+              <p>
+                <%= quiz.quiz_name %>
+              </p>
+              <p>created by <%= quiz.username %>
+              </p>
             </div>
             <div class="quiz-attempt">
               <a href='/api/quizzes/<%= quiz.id %>'>
