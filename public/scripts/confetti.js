@@ -1,62 +1,22 @@
-/** @type {HTMLCanvasElement} */
-//
-const canvas = document.getElementById('canvas');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-let ctx = canvas.getContext('2d');
+// for starting the confetti
 
-class Particle
+const start = () =>
 {
-  constructor(y)
+  setTimeout(function ()
   {
-    this.x = (Math.random() * canvas.width);
-    this.y = y;
-    this.size = (Math.floor(Math.random() * 10)) + 10;
-    this.hue = (Math.floor(Math.random() * 360));
-    this.gone = false;
-    this.degrees = Math.random() < 0.5 ? 0.1 : -0.1;
-    this.angle = 0;
-    this.rate = (Math.floor(Math.random() * 2)) + 0.5;
-  }
-  draw()
-  {
-    ctx.fillStyle = `hsl(${this.hue},50%,50%)`;
-    ctx.save();
-    ctx.translate(this.x, this.y);
-    ctx.rotate(this.angle);
-    ctx.fillRect(0 - this.size / 2, 0 - this.size / 2, this.size, this.size);
-    ctx.restore();
-  }
-  update()
-  {
-    if (this.y > canvas.height)
-    {
-      particleArray.push(new Particle(-50));
-      this.gone = true;
-    }
-    this.y += this.rate;
-    this.angle += this.degrees;
-    this.draw();
-  }
-}
+    confetti.start()
+  }, 1000); // 1000 is time that after 1 second start the confetti ( 1000 = 1 sec)
+};
 
-let particleArray = [];
+//  for stopping the confetti
 
-for (var i = 0; i < 400; i++)
+const stop = () =>
 {
-  particleArray.push(new Particle(
-    Math.random() * canvas.height
-  ));
-}
-
-function animate()
-{
-  requestAnimationFrame(animate);
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  for (var i = 0; i < particleArray.length; i++)
+  setTimeout(function ()
   {
-    particleArray[i].update();
-  }
-  particleArray = particleArray.filter(particle => !particle.gone);
-}
-animate();
+    confetti.stop()
+  }, 5000); // 5000 is time that after 5 second stop the confetti ( 5000 = 5 sec)
+};
+// after this here we are calling both the function so it works
+start();
+stop();
