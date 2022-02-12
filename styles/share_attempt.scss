@@ -140,16 +140,4 @@
     cursor: pointer;
     background-color: #bae7bc;
   }
-  #canvas {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: -10;
-  }
-  body,
-  html {
-    height: 100%;
-    margin: 0;
-    overflow: hidden;
-  }
 }
