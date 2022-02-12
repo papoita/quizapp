@@ -26,6 +26,8 @@
 
 <body>
 
+
+
   <!-- Top nav bar (fixed) -->
 
   <%- include('partials/_header'); %>
@@ -34,17 +36,30 @@
 
     <main class="quiz-results">
       <header>
-        <h1 class="quiz-results-name"><%= quiz_name %> results</h1>
-      </header>
-      <section class="result-info">
-        <h2 class="score">Final Score: <%= score %>/<%= number_of_questions %></h2>
+        <h1 class="quiz-results-name">
+          <%= quiz_name %> result
+        </h1>
+        <h1 class="score">Final Score: <%= score %>/<%= number_of_questions %>
+        </h1>
         <a class="try-again-link" type="button" href="/api/quizzes/<%= quiz_id %>">Try Quiz Again</a>
-      <div class="share-results">
-        <p>Share your quiz results with your friends with the following link:</p>
-        <a href="/share_attempt/<%= id %>">quizapp.com/attempts/<%= id %></a>
-      </div>
-    </section>
-  </main>
+      </header>
+
+      <section class="result-info">
+
+
+
+
+        <div class="share-results">
+          <p>Share your quiz results with your friends with the following link:</p>
+          <i class="fa-solid fa-bullhorn"></i>
+          <a class="shareattepmt" href="/share_attempt/<%= id %>">quizapp.com/attempts/<%= id %></a>
+
+
+        </div>
+
+      </section>
+    </main>
+
 </body>
 
 </html>

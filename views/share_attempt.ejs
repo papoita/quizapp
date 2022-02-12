@@ -23,9 +23,30 @@
   <!-- App JS -->
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
+  <script type="text/javascript" src="/scripts/confetti.js"></script>
 </head>
 
 <body>
+  <div id="confettis">
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+    <div class="confetti"></div>
+  </div>
 
   <!-- Top nav bar (fixed) -->
 
@@ -35,16 +56,21 @@
 
     <!-- Page-specific (main) content here -->
     <main class="quiz-new">
+
+
       <header>
         <h1 class="quiz-new-name">
-          <%= username %>'s result for <%= quiz_name %>
+          <%= username %>'s result for <b>
+              <%= quiz_name %>
+            </b>
         </h1>
+
 
       </header>
       <section class="share-quiz">
         <div>
           <p> <b>
-              <%= username %> scored <%= score %> out of <%= number_of_questions %> questions in this quiz
+              <%= username %> scored <%= score %> out of <%= number_of_questions %> questions correctly
             </b>
           </p>
 
@@ -53,6 +79,8 @@
 
         </div>
 
+
       </section>
     </main>
+
 </body>

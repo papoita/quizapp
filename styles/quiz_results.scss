@@ -3,7 +3,7 @@
 
   header {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     margin-top: 2rem;
   }
@@ -42,11 +42,18 @@
   background-image: url("https://www.transparenttextures.com/patterns/cloth-alike.png");
 
   i {
-    font-size: 7rem;
+    font-size: 3rem;
   }
 
   a {
     text-decoration: unset;
     color: black;
+  }
+  .shareattepmt {
+    color: white;
+  }
+  .score {
+    font-size: 30px;
+    text-align: right;
   }
 }
